@@ -1,0 +1,25 @@
+{
+  "affiliate_id": "1836460594",
+  "app_id": "",
+  "app_secret": "",
+  "default_affiliate_link": "https://shopee.com.br?aff_id=1836460594",
+  "min_discount_percent": 50,
+  "max_products_on_site": 20,
+  "auto_update_interval_minutes": 30,
+  "auto_update_interval_hours": 0.5,
+
+  "ml_publisher_id": "91070744",
+  "ml_app_id": "",
+  "ml_client_secret": "",
+  "ml_min_discount_percent": 50,
+  "ml_update_interval_minutes": 30,
+  "ml_categorias": [
+    "eletronicos",
+    "celulares",
+    "casa",
+    "moda",
+    "beleza",
+    "esportes",
+    "informatica"
+  ]
+}

@@ -1,0 +1,214 @@
+/* ==========================================================================
+   Permissions Manager Styles
+   ========================================================================== */
+.btn-permissions-admin {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background-color: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #fcd34d;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-permissions-admin:hover {
+  background-color: #f59e0b;
+  color: #000000;
+  border-color: #f59e0b;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+}
+
+.permissions-badge-count {
+  background-color: #f59e0b;
+  color: #000000;
+  font-size: 10px;
+  font-weight: 800;
+  border-radius: 10px;
+  padding: 1px 6px;
+  margin-left: 2px;
+}
+
+/* Permissions Modal */
+.modal-container-large {
+  max-width: 680px;
+  width: 92%;
+}
+
+.permissions-section {
+  margin-bottom: 20px;
+}
+
+.permissions-section-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user-req-card {
+  background-color: var(--bg-card-inner);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: var(--transition-fast);
+}
+
+.user-req-card:hover {
+  border-color: #2b3952;
+}
+
+.user-req-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.user-req-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-req-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-req-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.user-req-email {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.user-status-pill {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+}
+
+.status-pending {
+  background-color: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.status-approved {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.status-rejected {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.user-req-reason {
+  background-color: var(--bg-app);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: #c9d5e8;
+  display: flex;
+  gap: 6px;
+}
+
+.user-req-reason strong {
+  color: var(--text-muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.user-req-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.btn-action-approve {
+  background-color: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34d399;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-action-approve:hover {
+  background-color: #10b981;
+  color: #ffffff;
+}
+
+.btn-action-reject {
+  background-color: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #f87171;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-action-reject:hover {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.btn-action-delete {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  padding: 6px 8px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: var(--transition-fast);
+}
+
+.btn-action-delete:hover {
+  color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.empty-req-notice {
+  text-align: center;
+  padding: 24px;
+  color: var(--text-dim);
+  font-size: 12.5px;
+  background-color: var(--bg-card-inner);
+  border: 1px dashed var(--border-color);
+  border-radius: 10px;
+}

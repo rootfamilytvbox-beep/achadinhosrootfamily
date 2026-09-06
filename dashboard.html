@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mercado Livre Afiliados | Painel de Desempenho e Métricas</title>
+  <meta name="description" content="Painel oficial de monitoramento de afiliados Mercado Livre. Acompanhe cliques, conversões, comissões e desempenho em tempo real.">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ee4d2d'><path d='M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12z'/></svg>">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Chart.js for pixel-perfect curves & donut chart -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="dashboard_permissions.css">
+  <script src="auth.js"></script>
+</head>
+<body>
+
+  <div class="dashboard-layout">
+
+    <!-- ====================================================================
+         SIDEBAR NAVIGATION
+         ==================================================================== -->
+    <aside class="sidebar" id="sidebar">
+      <div>
+        <!-- Brand Header -->
+        <a href="dashboard.html" class="sidebar-brand">
+          <div class="shopee-logo-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12z"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">Mercado Livre</span>
+            <span class="brand-subtitle">AFILIADOS</span>
+          </div>
+        </a>
+
+        <!-- Menu Navigation -->
+        <ul class="sidebar-menu">
+          <li class="nav-item active">
+            <a href="#dashboard" id="navDashboard">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#produtos" id="navProdutos">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              <span>Produtos</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#links" id="navLinks">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              <span>Links de Afiliado</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#relatorios" id="navRelatorios">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              <span>Relatórios</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#cliques" id="navCliques">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m3 3 7 17 2-6 6-2L3 3z"/><path d="m13 13 4 4"/></svg>
+              <span>Cliques</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#conversoes" id="navConversoes">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              <span>Conversões</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#pagamentos" id="navPagamentos">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              <span>Pagamentos</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#bonus" id="navBonus">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+              <span>Bônus</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#ferramentas" id="navFerramentas">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              <span>Ferramentas</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#configuracoes" id="navConfig">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              <span>Configurações</span>
+            </a>
+          </li>
+          <li class="nav-item" id="navItemPermissions" style="display: none;">
+            <a href="#permissoes" id="navPermissoesLink" style="color: #fbbf24;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Permissões</span>
+              <span class="permissions-badge-count" id="sidebarPendingCount">1</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#ajuda" id="navAjuda">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Ajuda</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#sair" id="navSair">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              <span>Sair</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- User Profile Card -->
+      <div class="sidebar-profile">
+        <div class="profile-header">
+          <img src="assets/images/user-avatar.jpg" alt="Pedro Henrique" class="profile-avatar" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80'">
+          <div class="profile-meta">
+            <span class="profile-name">Pedro Henrique</span>
+            <span class="profile-badge">Afiliado Nível Bronze</span>
+          </div>
+        </div>
+
+        <div class="profile-progress-bar">
+          <div class="progress-fill" style="width: 0%;"></div>
+        </div>
+        <div class="profile-progress-info">
+          <span>0% para Prata</span>
+          <span>0%</span>
+        </div>
+
+        <a href="#perfil" class="btn-profile" id="btnVerPerfil">Ver meu perfil</a>
+      </div>
+    </aside>
+
+    <!-- ====================================================================
+         MAIN VIEWPORT
+         ==================================================================== -->
+    <main class="main-wrapper">
+      <div class="main-content">
+
+        <!-- Top Header -->
+        <header class="dashboard-header">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Abrir Menu">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+            <div class="header-greeting">
+              <h1>Olá, Pedro Henrique! 👋</h1>
+              <p>Acompanhe seu desempenho e veja suas comissões crescerem.</p>
+            </div>
+          </div>
+
+          <div class="header-controls">
+            <!-- Permissions Button for Admin -->
+            <button class="btn-permissions-admin" id="btnHeaderPermissions" style="display: none;" title="Gerenciar solicitações de permissão">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Permissões</span>
+              <span class="permissions-badge-count" id="headerPendingCount">1</span>
+            </button>
+
+            <!-- Site Link Button -->
+            <a href="index.html" target="_blank" class="btn-view-site" title="Abrir site afiliado em nova aba">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span>Ver Loja Ao Vivo</span>
+            </a>
+
+            <!-- Date Filter Pill -->
+            <button class="date-filter-btn" id="dateFilterBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span id="dateRangeText">17/05/2025 - 23/05/2025</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+
+            <!-- Notifications -->
+            <button class="btn-icon-circle" id="btnNotification" title="Notificações">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              <span class="notification-badge"></span>
+            </button>
+
+            <!-- User Avatar Thumbnail -->
+            <img src="assets/images/user-avatar.jpg" alt="Pedro Henrique" class="header-avatar" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80'">
+          </div>
+        </header>
+
+        <!-- ==================================================================
+             ROW 1: 4 KPI CARDS
+             ================================================================== -->
+        <section class="kpi-grid">
+          <!-- Cliques -->
+          <div class="kpi-card">
+            <div class="kpi-info">
+              <span class="kpi-label">Cliques</span>
+              <span class="kpi-value" id="kpiCliques">0</span>
+              <span class="kpi-trend" style="color: var(--text-muted);">
+                0% em relação à semana passada
+              </span>
+            </div>
+            <div class="kpi-icon-box kpi-icon-purple">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 3 7 17 2-6 6-2L3 3z"/><path d="m13 13 4 4"/></svg>
+            </div>
+          </div>
+
+          <!-- Conversões -->
+          <div class="kpi-card">
+            <div class="kpi-info">
+              <span class="kpi-label">Conversões</span>
+              <span class="kpi-value" id="kpiConversoes">0</span>
+              <span class="kpi-trend" style="color: var(--text-muted);">
+                0% em relação à semana passada
+              </span>
+            </div>
+            <div class="kpi-icon-box kpi-icon-green">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            </div>
+          </div>
+
+          <!-- Comissões -->
+          <div class="kpi-card">
+            <div class="kpi-info">
+              <span class="kpi-label">Comissões</span>
+              <span class="kpi-value" id="kpiComissoes">R$ 0,00</span>
+              <span class="kpi-trend" style="color: var(--text-muted);">
+                0% em relação à semana passada
+              </span>
+            </div>
+            <div class="kpi-icon-box kpi-icon-orange">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            </div>
+          </div>
+
+          <!-- Pedidos -->
+          <div class="kpi-card">
+            <div class="kpi-info">
+              <span class="kpi-label">Pedidos</span>
+              <span class="kpi-value" id="kpiPedidos">0</span>
+              <span class="kpi-trend" style="color: var(--text-muted);">
+                0% em relação à semana passada
+              </span>
+            </div>
+            <div class="kpi-icon-box kpi-icon-blue">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             ROW 2: CHARTS (DESEMPENHO + RESUMO DE COMISSÕES)
+             ================================================================== -->
+        <section class="charts-grid">
+          
+          <!-- Desempenho Multi-line Chart -->
+          <div class="chart-card">
+            <div class="card-header-row">
+              <h2 class="card-title">Desempenho</h2>
+              <button class="select-filter-btn" id="chartPeriodFilter">
+                <span>Últimos 7 dias</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+            </div>
+
+            <!-- Custom Legend -->
+            <div class="chart-legend-top">
+              <div><span class="legend-dot dot-purple"></span> Cliques</div>
+              <div><span class="legend-dot dot-green"></span> Conversões</div>
+              <div><span class="legend-dot dot-orange"></span> Comissões (R$)</div>
+            </div>
+
+            <div class="line-chart-container">
+              <canvas id="performanceChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Resumo de Comissões Donut Chart -->
+          <div class="chart-card">
+            <div class="card-header-row">
+              <h2 class="card-title">Resumo de Comissões</h2>
+            </div>
+
+            <div class="donut-chart-wrapper">
+              <div class="donut-canvas-box">
+                <canvas id="commissionsDonutChart"></canvas>
+                <div class="donut-center-label">
+                  <span class="donut-center-amount">R$ 0,00</span>
+                  <span class="donut-center-text">Total</span>
+                </div>
+              </div>
+
+              <!-- Breakdown List -->
+              <div class="donut-breakdown-list">
+                <div class="donut-item">
+                  <span class="donut-item-label">
+                    <span class="legend-dot dot-orange"></span> Mercado Livre
+                  </span>
+                  <div class="donut-item-values">
+                    <span class="donut-val">R$ 0,00</span>
+                    <span class="donut-pct">0%</span>
+                  </div>
+                </div>
+
+                <div class="donut-item">
+                  <span class="donut-item-label">
+                    <span class="legend-dot dot-blue"></span> Mercado Livre Mall
+                  </span>
+                  <div class="donut-item-values">
+                    <span class="donut-val">R$ 0,00</span>
+                    <span class="donut-pct">0%</span>
+                  </div>
+                </div>
+
+                <div class="donut-item">
+                  <span class="donut-item-label">
+                    <span class="legend-dot dot-green"></span> Indicado
+                  </span>
+                  <div class="donut-item-values">
+                    <span class="donut-val">R$ 0,00</span>
+                    <span class="donut-pct">0%</span>
+                  </div>
+                </div>
+
+                <div class="donut-item">
+                  <span class="donut-item-label">
+                    <span class="legend-dot dot-purple"></span> Bônus
+                  </span>
+                  <div class="donut-item-values">
+                    <span class="donut-val">R$ 0,00</span>
+                    <span class="donut-pct">0%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer-link">
+              <a href="#relatorios" id="linkRelatorioCompleto">
+                <span>Ver relatório completo</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ==================================================================
+             ROW 3: PRODUTOS MAIS VENDIDOS & SEUS LINKS DE AFILIADO
+             ================================================================== -->
+        <section class="details-grid">
+
+          <!-- Produtos mais vendidos -->
+          <div class="panel-card">
+            <div class="card-header-row">
+              <h2 class="card-title">Produtos mais vendidos</h2>
+              <a href="#produtos" class="link-ver-todos">Ver todos</a>
+            </div>
+
+            <div class="ranking-list" id="topProductsList">
+              <div class="empty-req-notice" style="padding: 32px 16px; text-align: center; border-radius: 12px;">
+                <div style="font-size: 26px; margin-bottom: 8px;">📊</div>
+                <div style="font-size: 13.5px; font-weight: 700; color: #ffffff;">Nenhuma venda registrada ainda</div>
+                <div style="color: var(--text-muted); font-size: 12px; margin-top: 4px; line-height: 1.4;">
+                  As comissões e os produtos mais vendidos aparecerão aqui conforme as compras forem realizadas.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Seus links de afiliado -->
+          <div class="panel-card">
+            <div class="card-header-row">
+              <h2 class="card-title">Seus links de afiliado</h2>
+              <a href="#links" class="link-ver-todos">Ver todos</a>
+            </div>
+
+            <div class="aff-links-list" id="affLinksList">
+              <!-- Link 1 -->
+              <div class="aff-link-card">
+                <div class="aff-link-info">
+                  <h4 class="aff-link-title">Faca de Caça e Churrasco Personalizada</h4>
+                  <div class="aff-link-url-row">
+                    <a href="https://shopee.com.br/Faca-De-Ca%C3%A7a-Pesca-Churrasco-Luxo-Personalizada-com-seu-Nome-Gravado-i.552841607.22993928341?aff_id=1836460594" target="_blank" class="aff-url-text">https://shopee.com.br/Faca-Personalizada...</a>
+                    <button class="btn-copy-link" data-url="https://shopee.com.br/Faca-De-Ca%C3%A7a-Pesca-Churrasco-Luxo-Personalizada-com-seu-Nome-Gravado-i.552841607.22993928341?aff_id=1836460594" title="Copiar link">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="aff-link-stat">
+                  <div class="aff-stat-num">0</div>
+                  <div class="aff-stat-label">cliques</div>
+                </div>
+              </div>
+
+              <!-- Link 2 -->
+              <div class="aff-link-card">
+                <div class="aff-link-info">
+                  <h4 class="aff-link-title">Óculos de Sol Esportivo Lente Azul</h4>
+                  <div class="aff-link-url-row">
+                    <a href="https://shopee.com.br/%C3%93culos-Sol-Esportivo-Mascara-Branco-Lente-Azul-Espelhado-Ciclismo-Bike-MTB-UV400-Corrida-Pesca-Masculino-i.1138019028.58262941970?aff_id=1836460594" target="_blank" class="aff-url-text">https://shopee.com.br/Oculos-Sol-Esportivo...</a>
+                    <button class="btn-copy-link" data-url="https://shopee.com.br/%C3%93culos-Sol-Esportivo-Mascara-Branco-Lente-Azul-Espelhado-Ciclismo-Bike-MTB-UV400-Corrida-Pesca-Masculino-i.1138019028.58262941970?aff_id=1836460594" title="Copiar link">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="aff-link-stat">
+                  <div class="aff-stat-num">0</div>
+                  <div class="aff-stat-label">cliques</div>
+                </div>
+              </div>
+
+              <!-- Link 3 -->
+              <div class="aff-link-card">
+                <div class="aff-link-info">
+                  <h4 class="aff-link-title">Pulseira Oceano Silicone Apple Watch / IWO</h4>
+                  <div class="aff-link-url-row">
+                    <a href="https://shopee.com.br/Pulseira-Oceano-Silicone-Para-Apple-Watch-e-Iwo-38mm-40mm-41mm-42mm-44mm-45mm-49mm-Ultra-serie-8-i.1242297287.22693870278?aff_id=1836460594" target="_blank" class="aff-url-text">https://shopee.com.br/Pulseira-Oceano...</a>
+                    <button class="btn-copy-link" data-url="https://shopee.com.br/Pulseira-Oceano-Silicone-Para-Apple-Watch-e-Iwo-38mm-40mm-41mm-42mm-44mm-45mm-49mm-Ultra-serie-8-i.1242297287.22693870278?aff_id=1836460594" title="Copiar link">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="aff-link-stat">
+                  <div class="aff-stat-num">0</div>
+                  <div class="aff-stat-label">cliques</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CTA Gerar Novo Link -->
+            <button class="btn-generate-link" id="btnOpenGenerateModal">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              <span>Gerar novo link de afiliado</span>
+            </button>
+          </div>
+
+        </section>
+
+        <!-- ==================================================================
+             ROW 4: BOTTOM PROMOTIONAL BANNER
+             ================================================================== -->
+        <section class="promo-referral-banner">
+          <div class="promo-left">
+            <div class="promo-trophy-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
+            </div>
+            <div class="promo-content">
+              <h3>Indique e ganhe mais!</h3>
+              <p>Convide amigos para se tornarem afiliados e ganhe até 10% de comissão extra!</p>
+            </div>
+          </div>
+
+          <div class="promo-right">
+            <button class="btn-invite" id="btnInvite">Convidar agora</button>
+
+            <!-- Vector Character Art matching the screenshot -->
+            <div class="promo-illustration">
+              <svg width="150" height="60" viewBox="0 0 200 80" fill="none">
+                <!-- Golden coins floating -->
+                <circle cx="20" cy="25" r="7" fill="#FBBF24" stroke="#D97706" stroke-width="1.5"/>
+                <circle cx="180" cy="20" r="8" fill="#FBBF24" stroke="#D97706" stroke-width="1.5"/>
+                <circle cx="190" cy="50" r="5" fill="#FBBF24" stroke="#D97706" stroke-width="1.5"/>
+                
+                <!-- Boy character -->
+                <circle cx="65" cy="26" r="14" fill="#FBD38D"/>
+                <path d="M51 24 C51 14, 79 14, 79 24 C79 16, 68 14, 58 17 Z" fill="#2D3748"/>
+                <!-- Boy hair -->
+                <path d="M53 22 C53 14, 77 14, 77 22 C72 17, 58 17, 53 22 Z" fill="#1A202C"/>
+                <!-- Boy shirt -->
+                <path d="M50 42 C50 38, 80 38, 80 42 L84 75 L46 75 Z" fill="#DD6B20"/>
+                <!-- Smartphone in hand -->
+                <rect x="76" y="46" width="10" height="18" rx="2" fill="#4A5568"/>
+                <circle cx="60" cy="27" r="1.5" fill="#2D3748"/>
+                <circle cx="70" cy="27" r="1.5" fill="#2D3748"/>
+                <path d="M62 33 Q65 36 68 33" stroke="#C53030" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+
+                <!-- Girl character -->
+                <circle cx="120" cy="28" r="13" fill="#FBD38D"/>
+                <!-- Girl long hair -->
+                <path d="M104 25 C104 12, 136 12, 136 25 C138 42, 134 52, 134 52 L106 52 C106 52, 102 42, 104 25 Z" fill="#4A5568"/>
+                <!-- Girl face front -->
+                <circle cx="120" cy="29" r="12" fill="#FEEBC8"/>
+                <circle cx="116" cy="28" r="1.5" fill="#2D3748"/>
+                <circle cx="124" cy="28" r="1.5" fill="#2D3748"/>
+                <path d="M118 34 Q120 37 122 34" stroke="#C53030" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+                <!-- Girl shirt -->
+                <path d="M106 44 C106 40, 134 40, 134 44 L138 75 L102 75 Z" fill="#DD6B20"/>
+                <!-- Smartphone in girl hand -->
+                <rect x="100" y="48" width="10" height="18" rx="2" fill="#CBD5E0"/>
+              </svg>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ====================================================================
+       MODAL: GERAR NOVO LINK DE AFILIADO
+       ==================================================================== -->
+  <div class="modal-overlay" id="generateModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>Gerar Novo Link de Afiliado</h3>
+        <button class="modal-close-btn" id="btnCloseGenerateModal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="inputMercado LivreUrl">Link do Produto Mercado Livre:</label>
+          <input type="url" id="inputMercado LivreUrl" placeholder="Cole o link da Mercado Livre (ex: https://shopee.com.br/...)" required>
+        </div>
+        <div class="form-group">
+          <label for="inputProductName">Nome / Título do Produto (Opcional):</label>
+          <input type="text" id="inputProductName" placeholder="Ex: Faca de Caça Personalizada">
+        </div>
+
+        <button class="btn-generate-link" id="btnProcessNewLink" style="margin-top: 8px;">
+          <span>Gerar Link com seu ID (1836460594)</span>
+        </button>
+
+        <div id="resultGeneratedBox" style="display: none; margin-top: 10px;">
+          <label style="font-size: 11.5px; color: var(--text-muted);">Seu Link Rastreável de Afiliado:</label>
+          <div class="generated-link-box">
+            <span class="generated-url-text" id="generatedLinkOutput"></span>
+            <button class="btn-copy-link" id="btnCopyGeneratedLink" title="Copiar">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       MODAL: GERENCIAMENTO DE PERMISSÕES E ACESSOS
+       ==================================================================== -->
+  <div class="modal-overlay" id="permissionsModal">
+    <div class="modal-container modal-container-large">
+      <div class="modal-header">
+        <div>
+          <h3>Gerenciamento de Permissões de Acesso</h3>
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">
+            Aprove ou recuse solicitações de cadastro para visualização do painel.
+          </p>
+        </div>
+        <button class="modal-close-btn" id="btnClosePermissionsModal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+        
+        <!-- Pending Users Section -->
+        <div class="permissions-section">
+          <div class="permissions-section-title">
+            <span>⏳ Solicitações Aguardando Aprovação</span>
+            <span id="pendingSectionCount" style="color: #fbbf24; font-weight: 700;">1 pendente</span>
+          </div>
+          <div id="pendingUsersList"></div>
+        </div>
+
+        <!-- Approved Users Section -->
+        <div class="permissions-section">
+          <div class="permissions-section-title">
+            <span>🟢 Usuários com Acesso Liberado</span>
+            <span id="approvedSectionCount" style="color: var(--color-green); font-weight: 700;">1 ativo</span>
+          </div>
+          <div id="approvedUsersList"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="dashboard-toast" id="dashboardToast">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <span id="toastMsg">Link copiado para a área de transferência!</span>
+  </div>
+
+  <!-- Synchronize with real site products and dynamic charts -->
+  <script src="data/products.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

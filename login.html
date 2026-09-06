@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login & Cadastro | Mercado Livre Afiliados Dashboard</title>
+  <meta name="description" content="Acesse o Painel de Controle de Afiliados da Mercado Livre. Faça login ou solicite permissão de acesso.">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ee4d2d'><path d='M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12z'/></svg>">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+  <!-- Ambient Glow Elements -->
+  <div class="bg-glow-orb-1"></div>
+  <div class="bg-glow-orb-2"></div>
+
+  <div class="auth-wrapper">
+    <div class="auth-card">
+
+      <!-- Brand Header -->
+      <div class="auth-header">
+        <a href="index.html" class="auth-logo">
+          <div class="auth-logo-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12z"/>
+            </svg>
+          </div>
+          <div class="auth-logo-text">
+            <span class="brand-title">Mercado Livre</span>
+            <span class="brand-subtitle">AFILIADOS</span>
+          </div>
+        </a>
+        <h2 id="authCardTitle">Acesso ao Painel de Métricas</h2>
+        <p id="authCardSubtitle">Entre com sua conta ou solicite permissão de acesso.</p>
+      </div>
+
+      <!-- Alert / Status Feedback Box -->
+      <div class="auth-alert-box" id="authAlertBox">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="alertIcon"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="alertMessage"></span>
+      </div>
+
+      <!-- Tab Switcher -->
+      <div class="auth-tabs">
+        <button type="button" class="tab-btn active" id="tabLogin">Entrar</button>
+        <button type="button" class="tab-btn" id="tabRegister">Cadastrar-se</button>
+      </div>
+
+      <!-- ================================================================
+           FORM 1: LOGIN
+           ================================================================ -->
+      <form class="auth-form active" id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">E-mail ou Usuário</label>
+          <div class="input-with-icon">
+            <span class="input-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </span>
+            <input type="email" id="loginEmail" class="form-control" placeholder="seuemail@exemplo.com" required autocomplete="email">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Senha</label>
+          <div class="input-with-icon">
+            <span class="input-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </span>
+            <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+            <button type="button" class="btn-toggle-pass" id="btnTogglePass" title="Ver senha">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-options">
+          <label class="checkbox-label">
+            <input type="checkbox" id="rememberMe" checked>
+            <span>Lembrar-me</span>
+          </label>
+          <a href="#" class="forgot-link" id="btnForgotPass">Esqueceu a senha?</a>
+        </div>
+
+        <button type="submit" class="btn-submit">
+          <span>Acessar Painel</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </form>
+
+      <!-- ================================================================
+           FORM 2: CADASTRO COM SOLICITAÇÃO DE PERMISSÃO
+           ================================================================ -->
+      <form class="auth-form" id="registerForm">
+        <div class="form-group">
+          <label for="regName">Nome Completo</label>
+          <div class="input-with-icon">
+            <span class="input-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </span>
+            <input type="text" id="regName" class="form-control" placeholder="Seu nome completo" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="regEmail">E-mail</label>
+          <div class="input-with-icon">
+            <span class="input-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </span>
+            <input type="email" id="regEmail" class="form-control" placeholder="seuemail@exemplo.com" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="regPassword">Criar Senha</label>
+          <div class="input-with-icon">
+            <span class="input-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </span>
+            <input type="password" id="regPassword" class="form-control" placeholder="Mínimo 4 caracteres" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="regReason">Motivo da Solicitação de Acesso</label>
+          <div class="input-with-icon">
+            <span class="input-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </span>
+            <input type="text" id="regReason" class="form-control" placeholder="Ex: Sou afiliado e preciso monitorar cliques e links">
+          </div>
+        </div>
+
+        <!-- Permission Notice Box -->
+        <div class="permission-notice-box">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div>
+            <strong>Acesso Restrito:</strong> Todo novo cadastro entra em status <em>Pendente de Permissão</em>. O administrador do painel precisa liberar o seu acesso antes da visualização das métricas.
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit">
+          <span>Solicitar Cadastro e Permissão</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+        </button>
+      </form>
+
+      <a href="index.html" class="back-to-store">← Voltar para a Loja Virtual</a>
+
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Tab Switching
+      const tabLogin = document.getElementById('tabLogin');
+      const tabRegister = document.getElementById('tabRegister');
+      const loginForm = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
+      const authCardTitle = document.getElementById('authCardTitle');
+      const authCardSubtitle = document.getElementById('authCardSubtitle');
+      const authAlertBox = document.getElementById('authAlertBox');
+      const alertMessage = document.getElementById('alertMessage');
+
+      function showAlert(msg, type = 'error') {
+        authAlertBox.className = 'auth-alert-box alert-' + type;
+        alertMessage.textContent = msg;
+        authAlertBox.style.display = 'flex';
+      }
+
+      function hideAlert() {
+        authAlertBox.style.display = 'none';
+      }
+
+      tabLogin.addEventListener('click', () => {
+        tabLogin.classList.add('active');
+        tabRegister.classList.remove('active');
+        loginForm.classList.add('active');
+        registerForm.classList.remove('active');
+        authCardTitle.textContent = 'Acesso ao Painel de Métricas';
+        authCardSubtitle.textContent = 'Entre com sua conta ou solicite permissão de acesso.';
+        hideAlert();
+      });
+
+      tabRegister.addEventListener('click', () => {
+        tabRegister.classList.add('active');
+        tabLogin.classList.remove('active');
+        registerForm.classList.add('active');
+        loginForm.classList.remove('active');
+        authCardTitle.textContent = 'Solicitar Cadastro no Painel';
+        authCardSubtitle.textContent = 'Preencha seus dados para pedir permissão ao administrador.';
+        hideAlert();
+      });
+
+      // Toggle Password Visibility
+      const btnTogglePass = document.getElementById('btnTogglePass');
+      const loginPassword = document.getElementById('loginPassword');
+      if (btnTogglePass && loginPassword) {
+        btnTogglePass.addEventListener('click', () => {
+          const type = loginPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+          loginPassword.setAttribute('type', type);
+        });
+      }
+
+      // Handle Login Form Submit
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        hideAlert();
+
+        const email = document.getElementById('loginEmail').value;
+        const pass = document.getElementById('loginPassword').value;
+
+        const res = window.Mercado LivreAuth.login(email, pass);
+
+        if (res.success) {
+          showAlert('Login realizado com sucesso! Redirecionando para o Dashboard...', 'success');
+          setTimeout(() => {
+            window.location.href = 'dashboard.html';
+          }, 800);
+        } else {
+          if (res.status === 'pending') {
+            showAlert('⏳ ACESSO PENDENTE: Sua conta foi cadastrada, mas ainda precisa da PERMISSÃO de um Administrador para visualizar o painel.', 'pending');
+          } else if (res.status === 'rejected') {
+            showAlert('❌ ACESSO RECUSADO: O administrador recusou a sua solicitação de permissão.', 'error');
+          } else {
+            showAlert(res.message || 'E-mail ou senha inválidos.', 'error');
+          }
+        }
+      });
+
+      // Handle Register Form Submit
+      registerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        hideAlert();
+
+        const name = document.getElementById('regName').value;
+        const email = document.getElementById('regEmail').value;
+        const pass = document.getElementById('regPassword').value;
+        const reason = document.getElementById('regReason').value;
+
+        const res = window.Mercado LivreAuth.register(name, email, pass, reason);
+
+        if (res.success) {
+          showAlert('✅ CADASTRO REALIZADO! Sua solicitação foi enviada ao Administrador. Aguarde a liberação da permissão para acessar o painel.', 'pending');
+          // Reset form fields
+          registerForm.reset();
+        } else {
+          showAlert(res.message, 'error');
+        }
+      });
+
+      const btnForgotPass = document.getElementById('btnForgotPass');
+      if (btnForgotPass) {
+        btnForgotPass.addEventListener('click', (e) => {
+          e.preventDefault();
+          showAlert('Para redefinir sua senha, solicite suporte ao administrador Pedro Henrique.', 'pending');
+        });
+      }
+
+      // Check if user is already logged in
+      const currentUser = window.Mercado LivreAuth.getCurrentUser();
+      if (currentUser && currentUser.status === 'approved') {
+        showAlert(`Você já está conectado como ${currentUser.name}. Redirecionando...`, 'success');
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 1000);
+      }
+    });
+  </script>
+</body>
+</html>

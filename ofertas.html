@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mercado Livre Afiliados | Todas as Ofertas e Descontos Imperdíveis</title>
+  <meta name="description" content="Filtre e encontre os melhores produtos com até 70% OFF e cupons exclusivos da Mercado Livre.">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ee4d2d'><path d='M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12z'/></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-announcement">
+    <span>🔥 Super Cupons do dia liberados! Aproveite Frete Grátis e até 70% OFF</span>
+  </div>
+
+  <!-- Header / Navbar -->
+  <header class="site-header" id="mainHeader">
+    <div class="header-container">
+
+      <!-- Mobile Hamburger Button -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Logo -->
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12z"/>
+          </svg>
+          <span class="logo-badge-s">S</span>
+        </div>
+        <div class="logo-text">
+          <span class="brand-name">Mercado Livre</span>
+          <span class="brand-sub">AFILIADOS</span>
+          <span class="brand-root">rootfamily</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="desktop-nav" aria-label="Navegação Principal">
+        <ul>
+          <li><a href="index.html" class="nav-link">Início</a></li>
+          <li><a href="ofertas.html" class="nav-link active">Ofertas</a></li>
+          <li><a href="categorias.html" class="nav-link">Categorias</a></li>
+          <li><a href="mais-vendidos.html" class="nav-link">Mais Vendidos</a></li>
+          <li><a href="#cupons" class="nav-link" id="navCupons">Cupons</a></li>
+          <li><a href="#contato" class="nav-link">Contato</a></li>
+          <li><a href="https://chat.whatsapp.com/CWm307LYTphFFVPdlFF1BP?s=cl&p=a&mlu=4&ilr=4" target="_blank" class="nav-link" style="color: #00b8ff; font-weight: bold;">Entre no grupo de ofertas</a></li>
+        </ul>
+      </nav>
+
+      <!-- Search and Header Actions -->
+      <div class="header-actions">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Buscar produtos..." autocomplete="off">
+          <button type="button" class="search-btn" aria-label="Pesquisar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+        </div>
+        <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Alternar tema" title="Modo Claro/Escuro">
+          <svg class="sun-icon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+        <a href="ofertas.html" class="icon-btn cart-btn" aria-label="Carrinho" title="Minhas Ofertas">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="badge">2</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <aside class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-header">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12z"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="brand-name">Mercado Livre</span>
+          <span class="brand-sub">AFILIADOS</span>
+          <span class="brand-root">rootfamily</span>
+        </div>
+      </div>
+      <button class="drawer-close" id="drawerClose">✕</button>
+    </div>
+    <ul class="drawer-nav">
+      <li><a href="index.html" class="drawer-link">🏠 Início</a></li>
+      <li><a href="ofertas.html" class="drawer-link active">🔥 Ofertas</a></li>
+      <li><a href="categorias.html" class="drawer-link">🗂️ Categorias</a></li>
+      <li><a href="mais-vendidos.html" class="drawer-link">⭐ Mais Vendidos</a></li>
+      <li><a href="#cupons" class="drawer-link">🎟️ Cupons</a></li>
+      <li><a href="#contato" class="drawer-link">✉️ Contato</a></li>
+    </ul>
+  </aside>
+
+  <!-- ===================================================
+       OFFERS HERO BANNER
+       =================================================== -->
+  <section class="offers-hero-banner">
+    <div class="offers-hero-inner">
+      <div class="offers-hero-text">
+        <h1 class="offers-hero-heading">Ofertas imperdíveis</h1>
+        <p class="offers-hero-sub">para você economizar mais!</p>
+        <p class="offers-hero-desc">Descontos exclusivos por tempo limitado.<br>Aproveite agora e garanta os melhores preços!</p>
+      </div>
+      <div class="offers-hero-visual">
+        <div class="offers-hero-glow"></div>
+        <img src="assets/images/offers-hero-tag.png" alt="Ofertas Mercado Livre" class="offers-hero-img">
+        <div class="offers-floating-badge badge-1">%</div>
+        <div class="offers-floating-badge badge-2">%</div>
+        <div class="offers-floating-badge badge-3">%</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       TRUST BAR
+       =================================================== -->
+  <section class="offers-trust-bar">
+    <div class="offers-trust-container">
+
+      <div class="trust-card">
+        <div class="trust-icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+        </div>
+        <div class="trust-info">
+          <strong>Descontos exclusivos</strong>
+          <span>Ofertas selecionadas</span>
+        </div>
+      </div>
+
+      <div class="trust-card">
+        <div class="trust-icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        </div>
+        <div class="trust-info">
+          <strong>Por tempo limitado</strong>
+          <span>Aproveite enquanto dura</span>
+        </div>
+      </div>
+
+      <div class="trust-card">
+        <div class="trust-icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+        </div>
+        <div class="trust-info">
+          <strong>Compra segura</strong>
+          <span>Seus dados protegidos</span>
+        </div>
+      </div>
+
+      <div class="trust-card">
+        <div class="trust-icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="3" width="15" height="13"></rect>
+            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+          </svg>
+        </div>
+        <div class="trust-info">
+          <strong>Entrega garantida</strong>
+          <span>Rápida e confiável</span>
+        </div>
+      </div>
+
+      <div class="trust-card">
+        <div class="trust-icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+          </svg>
+        </div>
+        <div class="trust-info">
+          <strong>Suporte dedicado</strong>
+          <span>Estamos aqui para ajudar</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Mobile Filter Overlay -->
+  <div class="filter-mobile-overlay" id="filterMobileOverlay"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <section class="offers-section" id="ofertas">
+      <div class="offers-container">
+
+        <!-- Mobile Filter Toggle -->
+        <button type="button" class="mobile-filter-toggle" id="mobileFilterToggle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="6" x2="20" y2="6"></line>
+            <line x1="8" y1="12" x2="16" y2="12"></line>
+            <line x1="11" y1="18" x2="13" y2="18"></line>
+          </svg>
+          Filtrar Ofertas
+        </button>
+
+        <!-- Left Sidebar Filters -->
+        <aside class="sidebar-filter-box">
+          <button class="modal-close mobile-filter-close" id="mobileFilterClose" title="Fechar filtros">✕</button>
+          <div class="sidebar-header">
+            <h2 class="sidebar-title">Filtrar ofertas</h2>
+            <button type="button" class="clear-btn" id="clearFiltersBtn">Limpar</button>
+          </div>
+
+          <form id="filterForm">
+            <!-- Filter Group: Desconto -->
+            <div class="filter-group">
+              <div class="filter-group-header">
+                <h3>Desconto</h3>
+                <span class="chevron-icon">ˆ</span>
+              </div>
+              <div class="filter-group-content">
+                <label class="checkbox-item">
+                  <input type="checkbox" name="filter-disc" value="all" checked>
+                  <span class="custom-checkbox"></span>
+                  <span class="label-text">Todos os descontos</span>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="filter-disc" value="0-20">
+                  <span class="custom-checkbox"></span>
+                  <span class="label-text">Até 20% OFF</span>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="filter-disc" value="20-40">
+                  <span class="custom-checkbox"></span>
+                  <span class="label-text">20% a 40% OFF</span>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="filter-disc" value="40-60">
+                  <span class="custom-checkbox"></span>
+                  <span class="label-text">40% a 60% OFF</span>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="filter-disc" value="60+">
+                  <span class="custom-checkbox"></span>
+                  <span class="label-text">Acima de 60% OFF</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Filter Group: Categoria -->
+            <div class="filter-group">
+              <div class="filter-group-header">
+                <h3>Categoria</h3>
+                <span class="chevron-icon">ˆ</span>
+              </div>
+              <div class="filter-group-content">
+                <label class="checkbox-item">
+                  <input type="checkbox" name="filter-cat" value="eletronicos">
+                  <span class="custom-checkbox"></span>
+                  <span class="label-text">Eletrônicos</span>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="filter-cat" value="casa">
+                  <span class="custom-checkbox"></span>
+                  <span class="label-text">Casa e Decoração</span>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="filter-cat" value="moda">
+                  <span class="custom-checkbox"></span>
+                  <span class="label-text">Moda</span>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="filter-cat" value="beleza">
+                  <span class="custom-checkbox"></span>
+                  <span class="label-text">Beleza</span>
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="filter-cat" value="esportes">
+                  <span class="custom-checkbox"></span>
+                  <span class="label-text">Esportes</span>
+                </label>
+                <a href="index.html#categorias" class="ver-mais-link">Ver mais ▾</a>
+              </div>
+            </div>
+
+            <!-- Filter Group: Ordenar por -->
+            <div class="filter-group">
+              <div class="filter-group-header">
+                <h3>Ordenar por</h3>
+                <span class="chevron-icon">ˆ</span>
+              </div>
+              <div class="filter-group-content">
+                <label class="radio-item">
+                  <input type="radio" name="filter-sort" value="recommended" checked>
+                  <span class="custom-radio"></span>
+                  <span class="label-text">Mais recomendados</span>
+                </label>
+                <label class="radio-item">
+                  <input type="radio" name="filter-sort" value="highest-discount">
+                  <span class="custom-radio"></span>
+                  <span class="label-text">Maior desconto</span>
+                </label>
+                <label class="radio-item">
+                  <input type="radio" name="filter-sort" value="lowest-price">
+                  <span class="custom-radio"></span>
+                  <span class="label-text">Menor preço</span>
+                </label>
+                <label class="radio-item">
+                  <input type="radio" name="filter-sort" value="best-sellers">
+                  <span class="custom-radio"></span>
+                  <span class="label-text">Mais vendidos</span>
+                </label>
+                <label class="radio-item">
+                  <input type="radio" name="filter-sort" value="recent">
+                  <span class="custom-radio"></span>
+                  <span class="label-text">Mais recentes</span>
+                </label>
+              </div>
+            </div>
+          </form>
+        </aside>
+
+        <!-- Right: Product Grid Area -->
+        <div class="offers-main-content">
+
+          <div class="offers-header-row">
+            <div class="offers-title-wrapper">
+              <h2>Todas as ofertas</h2>
+              <span class="offers-count" id="offersCount">(12 ofertas)</span>
+            </div>
+            <div class="sort-dropdown-box">
+              <label for="sortSelect">Ordenar por:</label>
+              <select id="sortSelect" class="select-control">
+                <option value="recommended">Mais recomendados</option>
+                <option value="highest-discount">Maior desconto</option>
+                <option value="lowest-price">Menor preço</option>
+                <option value="best-sellers">Mais vendidos</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Product Grid — 6 columns -->
+          <div class="products-grid-6" id="productsContainer">
+            <!-- Rendered dynamically by script.js -->
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         BOTTOM: Coupons + Newsletter side by side
+         =================================================== -->
+    <section class="offers-bottom-row" id="cupons">
+      <div class="offers-bottom-inner">
+
+        <!-- Coupon Banner -->
+        <div class="coupon-banner-card">
+          <div class="coupon-banner-left">
+            <div class="coupon-badge-icon">%</div>
+            <div class="coupon-banner-text">
+              <h3>Cupons exclusivos para você!</h3>
+              <p>Aproveite os melhores cupons da Mercado Livre disponíveis hoje.</p>
+            </div>
+          </div>
+          <div class="coupon-banner-right">
+            <button class="btn btn-outline-coupon" id="viewCouponsBtn">
+              Ver cupons
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                <line x1="7" y1="7" x2="7.01" y2="7"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="newsletter-card" id="contato">
+          <div class="newsletter-left">
+            <div class="mail-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <div class="newsletter-info">
+              <h3>Receba ofertas exclusivas!</h3>
+              <p>Cadastre seu e-mail e receba promoções direto no seu e-mail.</p>
+            </div>
+          </div>
+          <form class="newsletter-form" id="newsletterForm">
+            <input type="email" id="emailInput" placeholder="Seu melhor e-mail" required>
+            <button type="submit" class="btn btn-primary btn-submit">
+              Cadastrar <span class="arrow">→</span>
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-tab">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+      </svg>
+      <span>Início</span>
+    </a>
+    <a href="ofertas.html" class="mobile-nav-tab active">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M13.5 0.67s0.4 1.92-1.5 3.92c-1.6 1.6-1.5 3.3-0.1 4.7 1.8 1.8 4.3 0.2 4.3 0.2s0.8 1.4-0.4 3.1c-1.2 1.7-3.4 2.4-5.3 1.4-2.4-1.2-3.1-3.9-1.9-6.3 1.2-2.4 4.9-7 4.9-7zm-4.7 10.3c0.4 0.6 0.9 1.1 1.5 1.5-1.9 1.5-3.3 3.6-3.8 6-0.6 2.7 0.2 5.5 2 7.5 1.9 2 4.6 3 7.4 2.7 3.3-0.4 6.1-2.6 7.3-5.7 1.2-3.1 0.5-6.6-1.7-9-0.8-0.9-1.8-1.5-2.9-1.9 0.2 0.7 0.2 1.4 0.1 2.1-0.2 1.5-1.1 2.8-2.4 3.5-1.3 0.7-2.9 0.7-4.2 0-1.3-0.7-2.2-1.9-2.4-3.4-0.1-0.7-0.1-1.4 0.1-2.1-0.4-0.4-0.7-0.8-1-1.2z"/>
+      </svg>
+      <span>Ofertas</span>
+    </a>
+    <a href="index.html#categorias" class="mobile-nav-tab">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M4 11h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zm10 0h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zM4 21h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zm10 0h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1z"/>
+      </svg>
+      <span>Categorias</span>
+    </a>
+    <a href="#cupons" class="mobile-nav-tab">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M2.5 19h19a1.5 1.5 0 0 0 1.5-1.5v-11A1.5 1.5 0 0 0 21.5 5h-19A1.5 1.5 0 0 0 1 6.5v11A1.5 1.5 0 0 0 2.5 19zM9 8h6v2H9V8zm0 4h6v2H9v-2z"/>
+      </svg>
+      <span>Cupons</span>
+    </a>
+    <a href="dashboard.html" class="mobile-nav-tab">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+      </svg>
+      <span>Conta</span>
+    </a>
+  </nav>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div class="logo">
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12z"/>
+            </svg>
+          </div>
+          <div class="logo-text">
+            <span class="brand-name">Mercado Livre</span>
+            <span class="brand-sub">AFILIADOS</span>
+          <span class="brand-root">rootfamily</span>
+          </div>
+        </div>
+        <p class="footer-desc">Os melhores achadinhos e cupons de desconto Mercado Livre reunidos em um só lugar.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="ofertas.html">Ofertas</a></li>
+            <li><a href="categorias.html">Categorias</a></li>
+            <li><a href="mais-vendidos.html">Mais Vendidos</a></li>
+            <li><a href="#cupons">Cupons</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Termos de Uso</a></li>
+            <li><a href="#">Privacidade</a></li>
+            <li><a href="#">Divulgação de Afiliado</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Mercado Livre Afiliados. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Coupons Modal -->
+  <div class="modal-overlay" id="couponsModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>🎟️ Cupons Mercado Livre Liberados</h3>
+        <button class="modal-close" id="closeCouponsModal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="coupon-item">
+          <div class="coupon-code-box">FRETEGRATIS</div>
+          <div class="coupon-details">
+            <strong>Frete Grátis acima de R$ 19</strong>
+            <span>Válido em compras no app</span>
+          </div>
+        </div>
+        <div class="coupon-item">
+          <div class="coupon-code-box">SHOPEE10</div>
+          <div class="coupon-details">
+            <strong>10% OFF na Primeira Compra</strong>
+            <span>Válido para novos usuários</span>
+          </div>
+        </div>
+        <div class="coupon-item">
+          <div class="coupon-code-box">MEGA20</div>
+          <div class="coupon-details">
+            <strong>20% OFF em Eletrônicos</strong>
+            <span>Válido até fim do estoque</span>
+          </div>
+        </div>
+        <p class="coupon-copy-hint">Clique em qualquer cupom para copiar o código!</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="data/products.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
