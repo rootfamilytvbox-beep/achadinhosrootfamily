@@ -9,11 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. DATA & PRODUCTS MANAGEMENT
   // =========================================================================
   const FALLBACK_PRODUCTS = [
-    { id: 1, title: "Samsung Galaxy S23 5G 256GB Preto 8GB RAM", category: "eletronicos", price: "R$ 3.899,00", oldPrice: "R$ 4.599,00", discount: "15% OFF", rating: "4,9", reviews: "2,5k", savings: "Economize R$ 700,00", image: "assets/images/prod-fone.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/samsung-galaxy-s23?campId=SEU_ID_AFILIADO_AQUI" },
-    { id: 2, title: "Smart TV LG 50\" 4K UHD Wi-Fi Bluetooth", category: "eletronicos", price: "R$ 2.199,00", oldPrice: "R$ 2.899,00", discount: "24% OFF", rating: "4,8", reviews: "1,2k", savings: "Economize R$ 700,00", image: "assets/images/prod-smartwatch.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/smart-tv-lg-50?campId=SEU_ID_AFILIADO_AQUI" },
-    { id: 3, title: "Tênis Masculino Nike Revolution 6 Preto", category: "moda", price: "R$ 259,90", oldPrice: "R$ 399,90", discount: "35% OFF", rating: "4,7", reviews: "6,1k", savings: "Economize R$ 140,00", image: "assets/images/prod-fita-led.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/tenis-nike-revolution?campId=SEU_ID_AFILIADO_AQUI" },
-    { id: 4, title: "Notebook Lenovo IdeaPad 3 Intel Core i3 4GB 256GB SSD", category: "eletronicos", price: "R$ 2.099,00", oldPrice: "R$ 2.599,00", discount: "19% OFF", rating: "4,8", reviews: "9,8k", savings: "Economize R$ 500,00", image: "assets/images/prod-carregador.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/notebook-lenovo-ideapad?campId=SEU_ID_AFILIADO_AQUI" },
-    { id: 5, title: "Fritadeira Sem Óleo Air Fryer Mondial 4L", category: "casa", price: "R$ 289,90", oldPrice: "R$ 399,90", discount: "27% OFF", rating: "4,9", reviews: "15,2k", savings: "Economize R$ 110,00", image: "assets/images/prod-airfryer.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/fritadeira-air-fryer-mondial?campId=SEU_ID_AFILIADO_AQUI" }
+    { id: 1, title: "Samsung Galaxy S23 5G 256GB Preto 8GB RAM", category: "eletronicos", price: "R$ 3.899,00", oldPrice: "R$ 4.599,00", discount: "15% OFF", rating: "4,9", reviews: "2,5k", savings: "Economize R$ 700,00", image: "assets/images/prod-fone.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/samsung-galaxy-s23?campId=91070744" },
+    { id: 2, title: "Smart TV LG 50\" 4K UHD Wi-Fi Bluetooth", category: "eletronicos", price: "R$ 2.199,00", oldPrice: "R$ 2.899,00", discount: "24% OFF", rating: "4,8", reviews: "1,2k", savings: "Economize R$ 700,00", image: "assets/images/prod-smartwatch.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/smart-tv-lg-50?campId=91070744" },
+    { id: 3, title: "Tênis Masculino Nike Revolution 6 Preto", category: "moda", price: "R$ 259,90", oldPrice: "R$ 399,90", discount: "35% OFF", rating: "4,7", reviews: "6,1k", savings: "Economize R$ 140,00", image: "assets/images/prod-fita-led.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/tenis-nike-revolution?campId=91070744" },
+    { id: 4, title: "Notebook Lenovo IdeaPad 3 Intel Core i3 4GB 256GB SSD", category: "eletronicos", price: "R$ 2.099,00", oldPrice: "R$ 2.599,00", discount: "19% OFF", rating: "4,8", reviews: "9,8k", savings: "Economize R$ 500,00", image: "assets/images/prod-carregador.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/notebook-lenovo-ideapad?campId=91070744" },
+    { id: 5, title: "Fritadeira Sem Óleo Air Fryer Mondial 4L", category: "casa", price: "R$ 289,90", oldPrice: "R$ 399,90", discount: "27% OFF", rating: "4,9", reviews: "15,2k", savings: "Economize R$ 110,00", image: "assets/images/prod-airfryer.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/fritadeira-air-fryer-mondial?campId=91070744" }
   ];
 
   let ALL_PRODUCTS = (window.MERCADOLIVRE_PRODUCTS && Array.isArray(window.MERCADOLIVRE_PRODUCTS) && window.MERCADOLIVRE_PRODUCTS.length > 0)
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
               ${prod.oldPrice ? `<span class="price-old">${prod.oldPrice}</span>` : ''}
             </div>
             ${prod.savings ? `<div class="card-savings">${prod.savings}</div>` : ''}
-            <a href="${prod.affiliateUrl || 'https://shopee.com.br'}" target="_blank" rel="noopener noreferrer" class="btn btn-shopee">
+            <a href="${prod.affiliateUrl || 'https://mercadolivre.com.br'}" target="_blank" rel="noopener noreferrer" class="btn btn-shopee">
               Ver na Mercado Livre <span class="arrow">→</span>
             </a>
           </div>
@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sortSelect) sortSelect.addEventListener('change', applyFilters);
 
   // Mercado Livre Global Search Integration
-  const ML_AFFILIATE_ID = "SEU_ID_AFILIADO_AQUI"; // Substitua pelo seu ID real do Mercado Livre Afiliados
+  const ML_AFFILIATE_ID = "91070744"; // Substitua pelo seu ID real do Mercado Livre Afiliados
 
   function performMLSearch() {
     if (searchInput && searchInput.value.trim().length > 0) {
@@ -738,7 +738,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="price-current">${prod.price}</span>
                 ${prod.oldPrice ? `<span class="price-old">${prod.oldPrice}</span>` : ''}
               </div>
-              <a href="${prod.affiliateUrl || 'https://shopee.com.br?aff_id=1836460594'}" target="_blank" rel="noopener noreferrer" class="btn btn-shopee">
+              <a href="${prod.affiliateUrl || 'https://mercadolivre.com.br'}" target="_blank" rel="noopener noreferrer" class="btn btn-shopee">
                 Ver na Mercado Livre <span class="arrow">→</span>
               </a>
             </div>

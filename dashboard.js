@@ -396,7 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnInvite = document.getElementById('btnInvite');
   if (btnInvite) {
     btnInvite.addEventListener('click', () => {
-      const referralLink = `https://shopee.com.br/m/afiliados?ref=${AFFILIATE_ID}`;
+      const referralLink = `https://www.mercadolivre.com.br/afiliados?ref=${AFFILIATE_ID}`;
       navigator.clipboard.writeText(referralLink).then(() => {
         showToast('Link de convite de afiliados copiado!');
       });
