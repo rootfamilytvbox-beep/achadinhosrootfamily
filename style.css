@@ -1903,7 +1903,25 @@ h1, h2, h3, h4, .brand-name, .btn, .nav-link {
 /* =============================
    RESPONSIVE - 600px (Mobile)
    ============================= */
+
 @media (max-width: 600px) {
+  .header-container {
+    flex-wrap: wrap;
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    gap: 15px;
+  }
+  .search-box {
+    display: flex !important;
+    order: 10;
+    width: 100% !important;
+    margin-top: 5px;
+  }
+  .search-box input {
+    width: 100%;
+  }
+
   .top-announcement { font-size: 0.72rem; padding: 6px 12px; }
 
   .hero-heading { font-size: 1.75rem; }
@@ -1936,7 +1954,7 @@ h1, h2, h3, h4, .brand-name, .btn, .nav-link {
    ============================= */
 @media (max-width: 400px) {
   .header-container { padding: 0 12px; }
-  .search-box { display: none; }
+  
   .brand-name { font-size: 1.15rem; }
 
   .hero-heading { font-size: 1.6rem; }
@@ -2259,7 +2277,25 @@ h1, h2, h3, h4, .brand-name, .btn, .nav-link {
   .offers-trust-container .trust-card:nth-child(4) { border-right: none; }
 }
 
+
 @media (max-width: 600px) {
+  .header-container {
+    flex-wrap: wrap;
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    gap: 15px;
+  }
+  .search-box {
+    display: flex !important;
+    order: 10;
+    width: 100% !important;
+    margin-top: 5px;
+  }
+  .search-box input {
+    width: 100%;
+  }
+
   .products-grid-6    { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .offers-trust-container { grid-template-columns: 1fr; }
   .offers-trust-container .trust-card { border-right: none !important; border-top: 1px solid var(--border-color); }
@@ -2855,7 +2891,25 @@ h1, h2, h3, h4, .brand-name, .btn, .nav-link {
   .bs-hero-title { font-size: 2rem; }
 }
 
+
 @media (max-width: 600px) {
+  .header-container {
+    flex-wrap: wrap;
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    gap: 15px;
+  }
+  .search-box {
+    display: flex !important;
+    order: 10;
+    width: 100% !important;
+    margin-top: 5px;
+  }
+  .search-box input {
+    width: 100%;
+  }
+
   .bs-grid-5 { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .bs-toolbar { flex-direction: column; align-items: stretch; }
   .bs-filter-tabs { justify-content: center; }
