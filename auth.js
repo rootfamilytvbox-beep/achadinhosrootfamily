@@ -20,9 +20,9 @@
       users = [
         {
           id: 1,
-          name: 'Pedro Henrique',
-          email: 'admin@shopee.com',
-          password: 'admin',
+          name: 'Clodoaldo',
+          email: 'clodoaldo.mail@gmail.com',
+          password: 'Admin123',
           role: 'admin',
           status: 'approved', // 'approved', 'pending', 'rejected'
           level: 'Afiliado Nível Bronze',
@@ -43,6 +43,15 @@
         }
       ];
       localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(users));
+    } else {
+      // Force update admin credentials in case they already exist in localStorage
+      let admin = users.find(u => u.id === 1);
+      if (admin) {
+        admin.email = 'clodoaldo.mail@gmail.com';
+        admin.password = 'Admin123';
+        admin.name = 'Clodoaldo';
+        localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(users));
+      }
     }
     return users;
   }
@@ -208,7 +217,7 @@
   // Auto initialize
   initUsers();
 
-  window.Mercado LivreAuth = {
+  window.MercadoLivreAuth = {
     getUsers,
     getCurrentUser,
     login,

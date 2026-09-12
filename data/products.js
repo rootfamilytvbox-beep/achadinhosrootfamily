@@ -1,4 +1,4 @@
-window.SHOPEE_LAST_UPDATE = '06/09/2026 as 20:25';
+window.SHOPEE_LAST_UPDATE = "03/09/2026 às 21:40";
 window.SHOPEE_PRODUCTS = [
   {
     "title": "Creatina Monohidratada Pura 1kg Dark Lab Sem Sabor",
@@ -181,6 +181,76 @@ window.SHOPEE_PRODUCTS = [
     "rank": 12
   },
   {
+    "title": "Caixa de Som Portátil Bluetooth Resistente à Água Potente Graves Fortes",
+    "category": "eletronicos",
+    "price": "R$ 44,90",
+    "oldPrice": "R$ 149,90",
+    "discount": "70% OFF",
+    "rating": "4,9",
+    "reviews": "15,3k",
+    "image": "assets/images/prod-caixa-som.jpg",
+    "affiliateUrl": "https://shopee.com.br/Caixa-De-Som-Portatil-Bluetooth-Potente-A-Prova-D-Agua-Subwoofer-i.389201942.2091029384?aff_id=1836460594",
+    "id": 1788735021,
+    "updatedAt": "06/09/2026 às 19:35",
+    "rank": 13
+  },
+  {
+    "title": "Kit 13 Pincéis de Maquiagem Profissional com Estojo Aveludado",
+    "category": "beleza",
+    "price": "R$ 21,90",
+    "oldPrice": "R$ 73,00",
+    "discount": "70% OFF",
+    "rating": "4,9",
+    "reviews": "16,7k",
+    "image": "assets/images/prod-pinceis.jpg",
+    "affiliateUrl": "https://shopee.com.br/Kit-13-Pinceis-De-Maquiagem-Profissional-Com-Estojo-Veludo-i.298301949.1591029384?aff_id=1836460594",
+    "id": 1788734597,
+    "updatedAt": "06/09/2026 às 19:35",
+    "rank": 14
+  },
+  {
+    "title": "Câmera de Segurança Wi-Fi 360 Graus Visão Noturna Áudio Bidirecional",
+    "category": "eletronicos",
+    "price": "R$ 59,90",
+    "oldPrice": "R$ 199,90",
+    "discount": "70% OFF",
+    "rating": "4,8",
+    "reviews": "21,5k",
+    "image": "assets/images/prod-camera.jpg",
+    "affiliateUrl": "https://shopee.com.br/Camera-De-Seguranca-Lampada-Wi-Fi-360-Visao-Noturna-Audio-Bidirecional-i.389201943.2491029384?aff_id=1836460594",
+    "id": 1788734734,
+    "updatedAt": "06/09/2026 às 19:35",
+    "rank": 15
+  },
+  {
+    "title": "Kit 3 Camisetas Masculinas Básicas Algodão Confort Premium",
+    "category": "moda",
+    "price": "R$ 49,90",
+    "oldPrice": "R$ 169,90",
+    "discount": "70% OFF",
+    "rating": "4,8",
+    "reviews": "22,0k",
+    "image": "assets/images/prod-camisetas.jpg",
+    "affiliateUrl": "https://shopee.com.br/Kit-3-Camisetas-Masculinas-Basicas-Algodao-Gola-Redonda-Premium-i.302918291.1582019284?aff_id=1836460594",
+    "id": 1788734943,
+    "updatedAt": "06/09/2026 às 19:35",
+    "rank": 16
+  },
+  {
+    "title": "Smartwatch Inteligente D20 Monitor Cardíaco e Passos Bluetooth",
+    "category": "eletronicos",
+    "price": "R$ 29,90",
+    "oldPrice": "R$ 99,90",
+    "discount": "70% OFF",
+    "rating": "4,8",
+    "reviews": "18,4k",
+    "image": "assets/images/prod-smartwatch.jpg",
+    "affiliateUrl": "https://shopee.com.br/Relogio-Smartwatch-D20-Inteligente-Monitor-Cardiaco-Bluetooth-i.291048201.2189201948?aff_id=1836460594",
+    "id": 1788734470,
+    "updatedAt": "06/09/2026 às 19:35",
+    "rank": 17
+  },
+  {
     "title": "Smartphone Motorola G86 5G 256gb 8gb+16gb Ram Grafite",
     "category": "eletronicos",
     "price": "R$ 1.487,00",
@@ -194,5 +264,33 @@ window.SHOPEE_PRODUCTS = [
     "id": 1788733271,
     "updatedAt": "06/09/2026 as 19:08",
     "rank": 18
+  },
+  {
+    "title": "Teclado Gamer Mecânico RGB Switch Blue Anti-Ghosting Profissional",
+    "category": "eletronicos",
+    "price": "R$ 69,90",
+    "oldPrice": "R$ 233,00",
+    "discount": "70% OFF",
+    "rating": "4,9",
+    "reviews": "14,2k",
+    "image": "assets/images/prod-teclado.jpg",
+    "affiliateUrl": "https://shopee.com.br/Teclado-Mec%C3%A2nico-i.473616631.23793643404?aff_id=1836460594",
+    "id": 1788733212,
+    "updatedAt": "06/09/2026 às 19:05",
+    "rank": 19
+  },
+  {
+    "title": "Garrafa Térmica Inox 500ml Display LED Sensor Digital Temperatura",
+    "category": "casa",
+    "price": "R$ 23,90",
+    "oldPrice": "R$ 79,90",
+    "discount": "70% OFF",
+    "rating": "4,9",
+    "reviews": "29,1k",
+    "image": "assets/images/prod-garrafa.jpg",
+    "affiliateUrl": "https://shopee.com.br/Garrafa-Termica-Inox-500ml-Com-Sensor-Temperatura-Display-LED-Digital-i.298301948.1882019284?aff_id=1836460594",
+    "id": 1788732470,
+    "updatedAt": "06/09/2026 às 19:05",
+    "rank": 20
   }
 ];

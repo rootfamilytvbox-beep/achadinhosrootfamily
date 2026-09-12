@@ -219,7 +219,7 @@
         const email = document.getElementById('loginEmail').value;
         const pass = document.getElementById('loginPassword').value;
 
-        const res = window.Mercado LivreAuth.login(email, pass);
+        const res = window.MercadoLivreAuth.login(email, pass);
 
         if (res.success) {
           showAlert('Login realizado com sucesso! Redirecionando para o Dashboard...', 'success');
@@ -247,7 +247,7 @@
         const pass = document.getElementById('regPassword').value;
         const reason = document.getElementById('regReason').value;
 
-        const res = window.Mercado LivreAuth.register(name, email, pass, reason);
+        const res = window.MercadoLivreAuth.register(name, email, pass, reason);
 
         if (res.success) {
           showAlert('✅ CADASTRO REALIZADO! Sua solicitação foi enviada ao Administrador. Aguarde a liberação da permissão para acessar o painel.', 'pending');
@@ -267,7 +267,7 @@
       }
 
       // Check if user is already logged in
-      const currentUser = window.Mercado LivreAuth.getCurrentUser();
+      const currentUser = window.MercadoLivreAuth.getCurrentUser();
       if (currentUser && currentUser.status === 'approved') {
         showAlert(`Você já está conectado como ${currentUser.name}. Redirecionando...`, 'success');
         setTimeout(() => {
