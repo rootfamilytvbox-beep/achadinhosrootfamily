@@ -76,6 +76,26 @@ body.light-mode {
   --shadow-card-hover: 0 12px 40px rgba(0,0,0,0.14), 0 0 0 1px rgba(255,230,0,0.1);
 }
 
+/* Shopee Theme Overrides */
+body.shopee-theme {
+  --shopee-orange: #ee4d2d;
+  --shopee-orange-hover: #d73d1e;
+  --shopee-orange-glow: rgba(238, 77, 45, 0.35);
+  --shopee-orange-soft: rgba(238, 77, 45, 0.15);
+  --shopee-orange-gradient: linear-gradient(135deg, #ee4d2d 0%, #ff7337 100%);
+  --shopee-orange-gradient-glow: linear-gradient(135deg, rgba(238, 77, 45, 0.2) 0%, rgba(255, 115, 55, 0.05) 100%);
+  --border-hover: rgba(238, 77, 45, 0.5);
+  --border-glow: rgba(238, 77, 45, 0.25);
+  --shadow-orange: 0 8px 32px var(--shopee-orange-glow);
+  --shadow-orange-sm: 0 4px 16px rgba(238, 77, 45, 0.3);
+}
+
+body.shopee-theme.light-mode {
+  --border-hover: rgba(238, 77, 45, 0.45);
+  --border-glow: rgba(238, 77, 45, 0.2);
+  --shadow-card-hover: 0 12px 40px rgba(0,0,0,0.14), 0 0 0 1px rgba(238, 77, 45, 0.1);
+}
+
 /* =============================
    RESET & BASE
    ============================= */
@@ -2914,6 +2934,75 @@ h1, h2, h3, h4, .brand-name, .btn, .nav-link {
   .bs-toolbar { flex-direction: column; align-items: stretch; }
   .bs-filter-tabs { justify-content: center; }
 }
+
+/* =============================
+   STORE SWITCHER WIDGET
+   ============================= */
+.store-switcher {
+  position: fixed;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 1000;
+  background: var(--bg-card);
+  padding: 10px;
+  border-radius: 40px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(10px);
+}
+
+.store-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: var(--bg-input);
+  border: 2px solid transparent;
+  transition: all var(--transition-spring);
+  overflow: hidden;
+  padding: 8px;
+}
+
+.store-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.store-btn:hover {
+  transform: scale(1.1);
+}
+
+.store-btn.active {
+  border-color: var(--shopee-orange);
+  background: var(--bg-card-hover);
+  box-shadow: var(--shadow-orange-sm);
+}
+
+@media (max-width: 768px) {
+  .store-switcher {
+    top: auto;
+    bottom: 90px;
+    left: 20px;
+    transform: none;
+    flex-direction: row;
+    border-radius: 30px;
+    padding: 8px;
+  }
+  .store-btn {
+    width: 40px;
+    height: 40px;
+    padding: 6px;
+  }
+}
+
 
 
 
