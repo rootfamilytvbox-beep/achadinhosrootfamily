@@ -9,19 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. DATA & PRODUCTS MANAGEMENT
   // =========================================================================
   const ML_PRODUCTS_DATA = [
-    { id: 1, title: "Samsung Galaxy S23 5G 256GB Preto 8GB RAM", category: "eletronicos", price: "R$ 3.899,00", oldPrice: "R$ 4.599,00", discount: "15% OFF", rating: "4,9", reviews: "2,5k", savings: "Economize R$ 700,00", image: "assets/images/prod-fone.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/samsung-galaxy-s23?campId=91070744" },
-    { id: 2, title: "Smart TV LG 50\" 4K UHD Wi-Fi Bluetooth", category: "eletronicos", price: "R$ 2.199,00", oldPrice: "R$ 2.899,00", discount: "24% OFF", rating: "4,8", reviews: "1,2k", savings: "Economize R$ 700,00", image: "assets/images/prod-smartwatch.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/smart-tv-lg-50?campId=91070744" },
-    { id: 3, title: "Tênis Masculino Nike Revolution 6 Preto", category: "moda", price: "R$ 259,90", oldPrice: "R$ 399,90", discount: "35% OFF", rating: "4,7", reviews: "6,1k", savings: "Economize R$ 140,00", image: "assets/images/prod-fita-led.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/tenis-nike-revolution?campId=91070744" },
-    { id: 4, title: "Notebook Lenovo IdeaPad 3 Intel Core i3 4GB 256GB SSD", category: "eletronicos", price: "R$ 2.099,00", oldPrice: "R$ 2.599,00", discount: "19% OFF", rating: "4,8", reviews: "9,8k", savings: "Economize R$ 500,00", image: "assets/images/prod-carregador.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/notebook-lenovo-ideapad?campId=91070744" },
-    { id: 5, title: "Fritadeira Sem Óleo Air Fryer Mondial 4L", category: "casa", price: "R$ 289,90", oldPrice: "R$ 399,90", discount: "27% OFF", rating: "4,9", reviews: "15,2k", savings: "Economize R$ 110,00", image: "assets/images/prod-airfryer.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/fritadeira-air-fryer-mondial?campId=91070744" }
+    { id: 1, title: "Samsung Galaxy S23 5G 256GB Preto 8GB RAM", category: "eletronicos", price: "R$ 3.899,00", oldPrice: "R$ 4.599,00", discount: "15% OFF", rating: "4,9", reviews: "2,5k", savings: "Economize R$ 700,00", image: "assets/images/prod-ml-s23.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/samsung-galaxy-s23?campId=91070744" },
+    { id: 2, title: "Smart TV LG 50\" 4K UHD Wi-Fi Bluetooth", category: "eletronicos", price: "R$ 2.199,00", oldPrice: "R$ 2.899,00", discount: "24% OFF", rating: "4,8", reviews: "1,2k", savings: "Economize R$ 700,00", image: "assets/images/prod-ml-tv.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/smart-tv-lg-50?campId=91070744" },
+    { id: 3, title: "Tênis Masculino Nike Revolution 6 Preto", category: "moda", price: "R$ 259,90", oldPrice: "R$ 399,90", discount: "35% OFF", rating: "4,7", reviews: "6,1k", savings: "Economize R$ 140,00", image: "assets/images/prod-ml-tenis.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/tenis-nike-revolution?campId=91070744" },
+    { id: 4, title: "Notebook Lenovo IdeaPad 3 Intel Core i3 4GB 256GB SSD", category: "eletronicos", price: "R$ 2.099,00", oldPrice: "R$ 2.599,00", discount: "19% OFF", rating: "4,8", reviews: "9,8k", savings: "Economize R$ 500,00", image: "assets/images/prod-ml-notebook.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/notebook-lenovo-ideapad?campId=91070744" },
+    { id: 5, title: "Fritadeira Sem Óleo Air Fryer Mondial 4L", category: "casa", price: "R$ 289,90", oldPrice: "R$ 399,90", discount: "27% OFF", rating: "4,9", reviews: "15,2k", savings: "Economize R$ 110,00", image: "assets/images/prod-ml-airfryer.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/fritadeira-air-fryer-mondial?campId=91070744" }
   ];
 
   const SHOPEE_PRODUCTS_DATA = [
-    { id: 101, title: "Fone de Ouvido Bluetooth TWS Pro 5", category: "eletronicos", price: "R$ 29,90", oldPrice: "R$ 59,90", discount: "50% OFF", rating: "4,7", reviews: "10k+", savings: "Frete Grátis", image: "assets/images/prod-fone.jpg", affiliateUrl: "https://shopee.com.br/search?keyword=fone+bluetooth" },
+    { id: 101, title: "Fone de Ouvido Bluetooth TWS Pro 5", category: "eletronicos", price: "R$ 29,90", oldPrice: "R$ 59,90", discount: "50% OFF", rating: "4,7", reviews: "10k+", savings: "Frete Grátis", image: "assets/images/prod-fone-tws.png", affiliateUrl: "https://shopee.com.br/search?keyword=fone+bluetooth" },
     { id: 102, title: "Fita Led RGB 5 Metros com Controle", category: "casa", price: "R$ 15,90", oldPrice: "R$ 35,00", discount: "54% OFF", rating: "4,8", reviews: "5k+", savings: "Oferta Relâmpago", image: "assets/images/prod-fita-led.jpg", affiliateUrl: "https://shopee.com.br/search?keyword=fita+led" },
     { id: 103, title: "Relógio Inteligente Smartwatch D20", category: "eletronicos", price: "R$ 19,90", oldPrice: "R$ 49,90", discount: "60% OFF", rating: "4,6", reviews: "12k+", savings: "Frete Grátis", image: "assets/images/prod-smartwatch.jpg", affiliateUrl: "https://shopee.com.br/search?keyword=smartwatch" },
-    { id: 104, title: "Mini Processador de Alimentos Elétrico USB", category: "casa", price: "R$ 25,00", oldPrice: "R$ 45,00", discount: "44% OFF", rating: "4,9", reviews: "8k+", savings: "Mais Vendido", image: "assets/images/prod-airfryer.jpg", affiliateUrl: "https://shopee.com.br/search?keyword=processador" },
-    { id: 105, title: "Kit 5 Pares Meia Cano Curto Algodão", category: "moda", price: "R$ 9,90", oldPrice: "R$ 20,00", discount: "50% OFF", rating: "4,8", reviews: "20k+", savings: "Promoção", image: "assets/images/prod-fita-led.jpg", affiliateUrl: "https://shopee.com.br/search?keyword=meia" }
+    { id: 104, title: "Mini Processador de Alimentos Elétrico USB", category: "casa", price: "R$ 25,00", oldPrice: "R$ 45,00", discount: "44% OFF", rating: "4,9", reviews: "8k+", savings: "Mais Vendido", image: "assets/images/prod-liquidificador.png", affiliateUrl: "https://shopee.com.br/search?keyword=processador" },
+    { id: 105, title: "Kit 5 Camisetas Básicas Algodão", category: "moda", price: "R$ 49,90", oldPrice: "R$ 99,00", discount: "50% OFF", rating: "4,8", reviews: "20k+", savings: "Promoção", image: "assets/images/prod-camisetas.jpg", affiliateUrl: "https://shopee.com.br/search?keyword=camiseta" }
   ];
 
   const activeStoreData = localStorage.getItem('active_store') === 'shopee' ? SHOPEE_PRODUCTS_DATA : ML_PRODUCTS_DATA;
@@ -142,6 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.SHOPEE_PRODUCTS && Array.isArray(window.SHOPEE_PRODUCTS) && window.SHOPEE_PRODUCTS.length > 0) {
       ALL_PRODUCTS = window.SHOPEE_PRODUCTS;
       applyFilters();
+      renderHomeBestSellers();
       return;
     }
     try {
@@ -151,11 +152,52 @@ document.addEventListener('DOMContentLoaded', () => {
         if (Array.isArray(data) && data.length > 0) {
           ALL_PRODUCTS = data;
           applyFilters();
+          renderHomeBestSellers();
           return;
         }
       }
-    } catch (e) {}
+    } catch (e) {
+      console.warn("Could not load products.json. Using memory products.");
+    }
     applyFilters();
+    renderHomeBestSellers();
+  }
+
+  function renderHomeBestSellers() {
+    const homeBsGrid = document.getElementById('homeBestSellers');
+    if (!homeBsGrid) return;
+    
+    // Pick top 5 based on sales logic, or just first 5
+    const list = ALL_PRODUCTS.slice(0, 5);
+    const salesVolumeMap = { 0: "15k+ vendidos", 1: "10k+ vendidos", 2: "8k+ vendidos", 3: "5k+ vendidos", 4: "3k+ vendidos" };
+
+    homeBsGrid.innerHTML = list.map((prod, i) => {
+      const rankNum = i + 1;
+      return `
+        <div class="bestseller-card">
+          <div class="rank-number rank-${rankNum}">${rankNum}</div>
+          <div class="bestseller-thumb">
+            <img src="${prod.image}" alt="${prod.title}" loading="lazy">
+          </div>
+          <div class="bestseller-info">
+            <h3 class="bestseller-title">${prod.title}</h3>
+            <div class="bestseller-rating">
+              <span class="star">★</span>
+              <span class="rate">${prod.rating || '4,8'}</span>
+              <span class="count">(${prod.reviews || '2k+'})</span>
+            </div>
+            <div class="bestseller-pricing">
+              <span class="curr">${prod.price}</span>
+              ${prod.oldPrice ? `<span class="old">${prod.oldPrice}</span>` : ''}
+              ${prod.discount ? `<span class="disc-tag">${prod.discount}</span>` : ''}
+            </div>
+            <a href="${prod.affiliateUrl || '#'}" target="_blank" rel="noopener noreferrer" class="btn btn-shopee btn-card-action">
+              Ver na ${localStorage.getItem('active_store') === 'shopee' ? 'Shopee' : 'Mercado Livre'}
+            </a>
+          </div>
+        </div>
+      `;
+    }).join('');
   }
 
   // =========================================================================
