@@ -223,6 +223,11 @@ def extrair_dados_shopee(url):
             }
             imagem_url = cat_map.get(categoria, "assets/images/prod-fone.jpg")
 
+    affiliate_url = final_url
+    if AFFILIATE_ID and f"aff_id={AFFILIATE_ID}" not in affiliate_url:
+        sep = "&" if "?" in affiliate_url else "?"
+        affiliate_url = f"{affiliate_url}{sep}aff_id={AFFILIATE_ID}"
+
     return {
         "title": titulo,
         "category": categoria,
@@ -232,7 +237,7 @@ def extrair_dados_shopee(url):
         "rating": avaliacao,
         "reviews": vendas,
         "image": imagem_url,
-        "affiliateUrl": final_url
+        "affiliateUrl": affiliate_url
     }
 
 
