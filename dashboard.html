@@ -387,50 +387,16 @@
             </div>
 
             <div class="aff-links-list" id="affLinksList">
-              <!-- Link 1 -->
+              <!-- Renderizado dinamicamente com base nas consultas e compras reais -->
               <div class="aff-link-card">
                 <div class="aff-link-info">
-                  <h4 class="aff-link-title">Faca de Caça e Churrasco Personalizada</h4>
+                  <h4 class="aff-link-title">Monitoramento Ativo de Cliques</h4>
                   <div class="aff-link-url-row">
-                    <a href="https://lista.mercadolivre.com.br/produto" target="_blank" class="aff-url-text">https://lista.mercadolivre.com.br/produto"btn-copy-link" data-url="https://lista.mercadolivre.com.br/produto" title="Copiar link">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                    </button>
+                    <span class="aff-url-text" style="color: var(--text-muted); font-size: 11px;">Aguardando cliques no site ou buscas para exibir telemetria...</span>
                   </div>
                 </div>
                 <div class="aff-link-stat">
-                  <div class="aff-stat-num">0</div>
-                  <div class="aff-stat-label">cliques</div>
-                </div>
-              </div>
-
-              <!-- Link 2 -->
-              <div class="aff-link-card">
-                <div class="aff-link-info">
-                  <h4 class="aff-link-title">Óculos de Sol Esportivo Lente Azul</h4>
-                  <div class="aff-link-url-row">
-                    <a href="https://lista.mercadolivre.com.br/produto" target="_blank" class="aff-url-text">https://lista.mercadolivre.com.br/produto"btn-copy-link" data-url="https://lista.mercadolivre.com.br/produto" title="Copiar link">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                    </button>
-                  </div>
-                </div>
-                <div class="aff-link-stat">
-                  <div class="aff-stat-num">0</div>
-                  <div class="aff-stat-label">cliques</div>
-                </div>
-              </div>
-
-              <!-- Link 3 -->
-              <div class="aff-link-card">
-                <div class="aff-link-info">
-                  <h4 class="aff-link-title">Pulseira Oceano Silicone Apple Watch / IWO</h4>
-                  <div class="aff-link-url-row">
-                    <a href="https://lista.mercadolivre.com.br/produto" target="_blank" class="aff-url-text">https://lista.mercadolivre.com.br/produto"btn-copy-link" data-url="https://lista.mercadolivre.com.br/produto" title="Copiar link">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                    </button>
-                  </div>
-                </div>
-                <div class="aff-link-stat">
-                  <div class="aff-stat-num">0</div>
+                  <div class="aff-stat-num" id="statMonitoredClicks">0</div>
                   <div class="aff-stat-label">cliques</div>
                 </div>
               </div>
@@ -519,19 +485,26 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="inputMercado LivreUrl">Link do Produto Mercado Livre:</label>
-          <input type="url" id="inputMercado LivreUrl" placeholder="Cole o link da Mercado Livre (ex: https://lista.mercadolivre.com.br/produto" required>
+          <label for="selectAffiliatePlatform">Selecione a Loja / Plataforma:</label>
+          <select id="selectAffiliatePlatform" style="width: 100%; padding: 10px 14px; background: #161e2e; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; color: #fff; font-size: 13.5px; outline: none; margin-top: 4px;">
+            <option value="ml">Mercado Livre (Publisher ID: 91070744)</option>
+            <option value="shopee">Shopee (Affiliate ID: 1836460594)</option>
+          </select>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="margin-top: 10px;">
+          <label for="inputProductUrl">Link do Produto ou Busca:</label>
+          <input type="url" id="inputProductUrl" placeholder="Cole o link do produto ou digite o nome do produto" required>
+        </div>
+        <div class="form-group" style="margin-top: 10px;">
           <label for="inputProductName">Nome / Título do Produto (Opcional):</label>
           <input type="text" id="inputProductName" placeholder="Ex: Faca de Caça Personalizada">
         </div>
 
-        <button class="btn-generate-link" id="btnProcessNewLink" style="margin-top: 8px;">
-          <span>Gerar Link com seu ID (1836460594)</span>
+        <button class="btn-generate-link" id="btnProcessNewLink" style="margin-top: 12px;">
+          <span id="btnGenerateLabel">Gerar Link com Comissão Garantida</span>
         </button>
 
-        <div id="resultGeneratedBox" style="display: none; margin-top: 10px;">
+        <div id="resultGeneratedBox" style="display: none; margin-top: 12px;">
           <label style="font-size: 11.5px; color: var(--text-muted);">Seu Link Rastreável de Afiliado:</label>
           <div class="generated-link-box">
             <span class="generated-url-text" id="generatedLinkOutput"></span>

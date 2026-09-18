@@ -329,16 +329,19 @@ import urllib.parse
 
 def formatar_link_afiliado(url_original, aff_id, title=""):
     url_clean = (url_original or "").strip().rstrip("/")
+    if any(short in url_clean for short in ["s.shopee.com.br", "shope.ee"]):
+        return url_clean
     if not url_clean or url_clean == "https://shopee.com.br":
         if title:
             termo = urllib.parse.quote_plus(title.strip())
-            url_original = f"https://shopee.com.br/search?keyword={termo}"
+            url_clean = f"https://shopee.com.br/search?keyword={termo}"
         else:
-            url_original = "https://shopee.com.br"
-    if aff_id and f"aff_id={aff_id}" not in url_original:
-        sep = "&" if "?" in url_original else "?"
-        return f"{url_original}{sep}aff_id={aff_id}"
-    return url_original
+            url_clean = "https://shopee.com.br"
+    if aff_id:
+        url_limpa = re.sub(r'[?&](aff_id|utm_source|utm_medium|utm_campaign|af_siteid)=[^&]*', '', url_clean).rstrip('&').rstrip('?')
+        sep = "&" if "?" in url_limpa else "?"
+        return f"{url_limpa}{sep}aff_id={aff_id}&utm_source=an_{aff_id}&utm_medium=affiliates&utm_campaign=site_afiliados&af_siteid=an_{aff_id}"
+    return url_clean
 
 
 def publicar_no_site(ofertas):

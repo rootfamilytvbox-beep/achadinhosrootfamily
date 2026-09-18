@@ -140,12 +140,14 @@ def montar_headers(token=None):
 
 def gerar_link_afiliado(url_produto, publisher_id):
     if not url_produto:
-        base = f"{ML_AFILIADO_URL}/?tracking_id={publisher_id}" if publisher_id else ML_AFILIADO_URL
+        base = f"{ML_AFILIADO_URL}/?tracking_id={publisher_id}&affiliate={publisher_id}&matt_tool={publisher_id}&campId={publisher_id}" if publisher_id else ML_AFILIADO_URL
         return base
-    url_limpa = re.sub(r'[?&]tracking_id=[^&]*', '', url_produto).rstrip('&').rstrip('?')
+    if "mercadolivre.com/sec/" in url_produto:
+        return url_produto
+    url_limpa = re.sub(r'[?&](tracking_id|affiliate|matt_tool|campId|aff_id)=[^&]*', '', url_produto).rstrip('&').rstrip('?')
     if publisher_id:
         sep = "&" if "?" in url_limpa else "?"
-        return f"{url_limpa}{sep}tracking_id={publisher_id}"
+        return f"{url_limpa}{sep}tracking_id={publisher_id}&affiliate={publisher_id}&matt_tool={publisher_id}&campId={publisher_id}"
     return url_limpa
 
 

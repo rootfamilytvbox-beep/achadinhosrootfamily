@@ -6,22 +6,159 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // =========================================================================
-  // 1. DATA & PRODUCTS MANAGEMENT
+  // 1. DATA & AFFILIATE CANONICAL ENGINE
   // =========================================================================
+  const ML_AFFILIATE_ID = "91070744";
+  const SHOPEE_AFFILIATE_ID = "1836460594";
+
+  /**
+   * Gera a URL canônica de afiliado da Shopee garantindo o identificador e tags UTM oficiais.
+   */
+  function buildShopeeAffiliateUrl(urlOrKeyword, isSearch = false) {
+    const raw = (urlOrKeyword || '').trim();
+    if (!raw) {
+      return `https://shopee.com.br?aff_id=${SHOPEE_AFFILIATE_ID}&utm_source=an_${SHOPEE_AFFILIATE_ID}&utm_medium=affiliates&utm_campaign=site_afiliados`;
+    }
+
+    // Links curtos oficiais da Shopee (s.shopee.com.br / shope.ee) preservam atribuição
+    if (raw.includes('s.shopee.com.br') || raw.includes('shope.ee')) {
+      return raw;
+    }
+
+    // Se for termo de busca ou texto sem protocolo HTTP
+    if (isSearch || (!raw.startsWith('http://') && !raw.startsWith('https://'))) {
+      const term = encodeURIComponent(raw);
+      return `https://shopee.com.br/search?keyword=${term}&aff_id=${SHOPEE_AFFILIATE_ID}&utm_source=an_${SHOPEE_AFFILIATE_ID}&utm_medium=affiliates&utm_campaign=site_afiliados&af_siteid=an_${SHOPEE_AFFILIATE_ID}`;
+    }
+
+    // Se for URL de produto do ML e o usuário estiver na loja Shopee, converter para busca na Shopee
+    if (raw.includes('mercadolivre.com.br')) {
+      return `https://shopee.com.br/search?keyword=ofertas&aff_id=${SHOPEE_AFFILIATE_ID}&utm_source=an_${SHOPEE_AFFILIATE_ID}&utm_medium=affiliates&utm_campaign=site_afiliados`;
+    }
+
+    // Limpar parâmetros anteriores para não duplicar
+    let cleanUrl = raw.replace(/[?&](aff_id|utm_source|utm_medium|utm_campaign|af_siteid)=[^&]*/g, '');
+    cleanUrl = cleanUrl.replace(/\?&/, '?').replace(/&&+/, '&').replace(/[?&]$/, '');
+
+    const sep = cleanUrl.includes('?') ? '&' : '?';
+    return `${cleanUrl}${sep}aff_id=${SHOPEE_AFFILIATE_ID}&utm_source=an_${SHOPEE_AFFILIATE_ID}&utm_medium=affiliates&utm_campaign=site_afiliados&af_siteid=an_${SHOPEE_AFFILIATE_ID}`;
+  }
+
+  /**
+   * Gera a URL canônica de afiliado do Mercado Livre com conjunto quádruplo de parâmetros.
+   */
+  function buildMlAffiliateUrl(urlOrKeyword, isSearch = false) {
+    const raw = (urlOrKeyword || '').trim();
+    if (!raw) {
+      return `https://www.mercadolivre.com.br/?tracking_id=${ML_AFFILIATE_ID}&affiliate=${ML_AFFILIATE_ID}&matt_tool=${ML_AFFILIATE_ID}&campId=${ML_AFFILIATE_ID}`;
+    }
+
+    // Link oficial encurtado do Mercado Livre preserva comissão diretamente
+    if (raw.includes('mercadolivre.com/sec/')) {
+      return raw;
+    }
+
+    // Se for busca ou texto puro
+    if (isSearch || (!raw.startsWith('http://') && !raw.startsWith('https://'))) {
+      const term = encodeURIComponent(raw);
+      return `https://lista.mercadolivre.com.br/${term}?tracking_id=${ML_AFFILIATE_ID}&affiliate=${ML_AFFILIATE_ID}&matt_tool=${ML_AFFILIATE_ID}&campId=${ML_AFFILIATE_ID}`;
+    }
+
+    // Se for link da Shopee e usuário estiver no ML, converter para busca no ML
+    if (raw.includes('shopee.com.br')) {
+      return `https://lista.mercadolivre.com.br/ofertas?tracking_id=${ML_AFFILIATE_ID}&affiliate=${ML_AFFILIATE_ID}&matt_tool=${ML_AFFILIATE_ID}&campId=${ML_AFFILIATE_ID}`;
+    }
+
+    // Limpar parâmetros anteriores
+    let cleanUrl = raw.replace(/[?&](tracking_id|affiliate|matt_tool|campId|aff_id)=[^&]*/g, '');
+    cleanUrl = cleanUrl.replace(/\?&/, '?').replace(/&&+/, '&').replace(/[?&]$/, '');
+
+    const sep = cleanUrl.includes('?') ? '&' : '?';
+    return `${cleanUrl}${sep}tracking_id=${ML_AFFILIATE_ID}&affiliate=${ML_AFFILIATE_ID}&matt_tool=${ML_AFFILIATE_ID}&campId=${ML_AFFILIATE_ID}`;
+  }
+
+  /**
+   * Rastreia o clique (total, loja, data) e abre o link garantindo as comissões.
+   */
+  function trackAndOpenAffiliate(targetUrl, store, title = 'Produto Afiliado', isSearch = false) {
+    const activeStore = store || localStorage.getItem('active_store') || 'ml';
+    let finalUrl = '';
+
+    if (activeStore === 'shopee') {
+      finalUrl = buildShopeeAffiliateUrl(targetUrl, isSearch);
+    } else {
+      finalUrl = buildMlAffiliateUrl(targetUrl, isSearch);
+    }
+
+    try {
+      // 1. Contador total de cliques para o dashboard
+      const currentTotal = parseInt(localStorage.getItem('shopee_site_clicks') || '0', 10) || 0;
+      localStorage.setItem('shopee_site_clicks', currentTotal + 1);
+
+      // 2. Contador por loja
+      const storeKey = activeStore === 'shopee' ? 'clicks_shopee' : 'clicks_ml';
+      const storeClicks = parseInt(localStorage.getItem(storeKey) || '0', 10) || 0;
+      localStorage.setItem(storeKey, storeClicks + 1);
+
+      // 3. Contador por tipo (busca vs clique em produto)
+      const typeKey = isSearch ? 'clicks_search' : 'clicks_products';
+      const typeClicks = parseInt(localStorage.getItem(typeKey) || '0', 10) || 0;
+      localStorage.setItem(typeKey, typeClicks + 1);
+
+      // 4. Distribuição diária (para o gráfico do painel)
+      const today = new Date().toISOString().slice(0, 10);
+      let dailyMap = {};
+      try {
+        dailyMap = JSON.parse(localStorage.getItem('site_daily_clicks') || '{}');
+      } catch (e) { dailyMap = {}; }
+      dailyMap[today] = (dailyMap[today] || 0) + 1;
+      localStorage.setItem('site_daily_clicks', JSON.stringify(dailyMap));
+
+      // 5. Histórico recente de atividades
+      let recent = [];
+      try {
+        recent = JSON.parse(localStorage.getItem('site_recent_clicks') || '[]');
+      } catch (e) { recent = []; }
+      recent.unshift({
+        title: title || (isSearch ? `Consulta: ${targetUrl}` : 'Compra / Produto'),
+        store: activeStore === 'shopee' ? 'Shopee' : 'Mercado Livre',
+        type: isSearch ? 'Consulta' : 'Compra',
+        url: finalUrl,
+        time: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+        date: new Date().toLocaleDateString('pt-BR')
+      });
+      if (recent.length > 50) recent = recent.slice(0, 50);
+      localStorage.setItem('site_recent_clicks', JSON.stringify(recent));
+
+      // Disparar evento para atualizar abas abertas do painel
+      window.dispatchEvent(new Event('storage'));
+    } catch (e) {
+      console.warn('Erro ao salvar telemetria de cliques:', e);
+    }
+
+    // Abrir em nova aba segura
+    window.open(finalUrl, '_blank', 'noopener,noreferrer');
+  }
+
+  // Expor no escopo global
+  window.trackAndOpenAffiliate = trackAndOpenAffiliate;
+  window.buildShopeeAffiliateUrl = buildShopeeAffiliateUrl;
+  window.buildMlAffiliateUrl = buildMlAffiliateUrl;
+
   const ML_PRODUCTS_DATA = [
-    { id: 1, title: "Samsung Galaxy S23 5G 256GB Preto 8GB RAM", category: "eletronicos", price: "R$ 3.899,00", oldPrice: "R$ 4.599,00", discount: "15% OFF", rating: "4,9", reviews: "2,5k", savings: "Economize R$ 700,00", image: "assets/images/prod-ml-s23.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/samsung-galaxy-s23?campId=91070744" },
-    { id: 2, title: "Smart TV LG 50\" 4K UHD Wi-Fi Bluetooth", category: "eletronicos", price: "R$ 2.199,00", oldPrice: "R$ 2.899,00", discount: "24% OFF", rating: "4,8", reviews: "1,2k", savings: "Economize R$ 700,00", image: "assets/images/prod-ml-tv.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/smart-tv-lg-50?campId=91070744" },
-    { id: 3, title: "Tênis Masculino Nike Revolution 6 Preto", category: "moda", price: "R$ 259,90", oldPrice: "R$ 399,90", discount: "35% OFF", rating: "4,7", reviews: "6,1k", savings: "Economize R$ 140,00", image: "assets/images/prod-ml-tenis.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/tenis-nike-revolution?campId=91070744" },
-    { id: 4, title: "Notebook Lenovo IdeaPad 3 Intel Core i3 4GB 256GB SSD", category: "eletronicos", price: "R$ 2.099,00", oldPrice: "R$ 2.599,00", discount: "19% OFF", rating: "4,8", reviews: "9,8k", savings: "Economize R$ 500,00", image: "assets/images/prod-ml-notebook.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/notebook-lenovo-ideapad?campId=91070744" },
-    { id: 5, title: "Fritadeira Sem Óleo Air Fryer Mondial 4L", category: "casa", price: "R$ 289,90", oldPrice: "R$ 399,90", discount: "27% OFF", rating: "4,9", reviews: "15,2k", savings: "Economize R$ 110,00", image: "assets/images/prod-ml-airfryer.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/fritadeira-air-fryer-mondial?campId=91070744" }
+    { id: 1, title: "Samsung Galaxy S23 5G 256GB Preto 8GB RAM", category: "eletronicos", price: "R$ 3.899,00", oldPrice: "R$ 4.599,00", discount: "15% OFF", rating: "4,9", reviews: "2,5k", savings: "Economize R$ 700,00", image: "assets/images/prod-ml-s23.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/samsung-galaxy-s23?tracking_id=91070744&affiliate=91070744&matt_tool=91070744&campId=91070744" },
+    { id: 2, title: "Smart TV LG 50\" 4K UHD Wi-Fi Bluetooth", category: "eletronicos", price: "R$ 2.199,00", oldPrice: "R$ 2.899,00", discount: "24% OFF", rating: "4,8", reviews: "1,2k", savings: "Economize R$ 700,00", image: "assets/images/prod-ml-tv.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/smart-tv-lg-50?tracking_id=91070744&affiliate=91070744&matt_tool=91070744&campId=91070744" },
+    { id: 3, title: "Tênis Masculino Nike Revolution 6 Preto", category: "moda", price: "R$ 259,90", oldPrice: "R$ 399,90", discount: "35% OFF", rating: "4,7", reviews: "6,1k", savings: "Economize R$ 140,00", image: "assets/images/prod-ml-tenis.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/tenis-nike-revolution?tracking_id=91070744&affiliate=91070744&matt_tool=91070744&campId=91070744" },
+    { id: 4, title: "Notebook Lenovo IdeaPad 3 Intel Core i3 4GB 256GB SSD", category: "eletronicos", price: "R$ 2.099,00", oldPrice: "R$ 2.599,00", discount: "19% OFF", rating: "4,8", reviews: "9,8k", savings: "Economize R$ 500,00", image: "assets/images/prod-ml-notebook.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/notebook-lenovo-ideapad?tracking_id=91070744&affiliate=91070744&matt_tool=91070744&campId=91070744" },
+    { id: 5, title: "Fritadeira Sem Óleo Air Fryer Mondial 4L", category: "casa", price: "R$ 289,90", oldPrice: "R$ 399,90", discount: "27% OFF", rating: "4,9", reviews: "15,2k", savings: "Economize R$ 110,00", image: "assets/images/prod-ml-airfryer.jpg", affiliateUrl: "https://lista.mercadolivre.com.br/fritadeira-air-fryer-mondial?tracking_id=91070744&affiliate=91070744&matt_tool=91070744&campId=91070744" }
   ];
 
   const SHOPEE_PRODUCTS_DATA = [
-    { id: 101, title: "Fone de Ouvido Bluetooth TWS Pro 5", category: "eletronicos", price: "R$ 29,90", oldPrice: "R$ 59,90", discount: "50% OFF", rating: "4,7", reviews: "10k+", savings: "Frete Grátis", image: "assets/images/prod-fone-tws.png", affiliateUrl: "https://shopee.com.br/search?keyword=fone+bluetooth" },
-    { id: 102, title: "Fita Led RGB 5 Metros com Controle", category: "casa", price: "R$ 15,90", oldPrice: "R$ 35,00", discount: "54% OFF", rating: "4,8", reviews: "5k+", savings: "Oferta Relâmpago", image: "assets/images/prod-fita-led.jpg", affiliateUrl: "https://shopee.com.br/search?keyword=fita+led" },
-    { id: 103, title: "Relógio Inteligente Smartwatch D20", category: "eletronicos", price: "R$ 19,90", oldPrice: "R$ 49,90", discount: "60% OFF", rating: "4,6", reviews: "12k+", savings: "Frete Grátis", image: "assets/images/prod-smartwatch.jpg", affiliateUrl: "https://shopee.com.br/search?keyword=smartwatch" },
-    { id: 104, title: "Mini Processador de Alimentos Elétrico USB", category: "casa", price: "R$ 25,00", oldPrice: "R$ 45,00", discount: "44% OFF", rating: "4,9", reviews: "8k+", savings: "Mais Vendido", image: "assets/images/prod-liquidificador.png", affiliateUrl: "https://shopee.com.br/search?keyword=processador" },
-    { id: 105, title: "Kit 5 Camisetas Básicas Algodão", category: "moda", price: "R$ 49,90", oldPrice: "R$ 99,00", discount: "50% OFF", rating: "4,8", reviews: "20k+", savings: "Promoção", image: "assets/images/prod-camisetas.jpg", affiliateUrl: "https://shopee.com.br/search?keyword=camiseta" }
+    { id: 101, title: "Fone de Ouvido Bluetooth TWS Pro 5", category: "eletronicos", price: "R$ 29,90", oldPrice: "R$ 59,90", discount: "50% OFF", rating: "4,7", reviews: "10k+", savings: "Frete Grátis", image: "assets/images/prod-fone-tws.png", affiliateUrl: "https://shopee.com.br/search?keyword=fone+bluetooth&aff_id=1836460594&utm_source=an_1836460594&utm_medium=affiliates&utm_campaign=site_afiliados" },
+    { id: 102, title: "Fita Led RGB 5 Metros com Controle", category: "casa", price: "R$ 15,90", oldPrice: "R$ 35,00", discount: "54% OFF", rating: "4,8", reviews: "5k+", savings: "Oferta Relâmpago", image: "assets/images/prod-fita-led.jpg", affiliateUrl: "https://shopee.com.br/search?keyword=fita+led&aff_id=1836460594&utm_source=an_1836460594&utm_medium=affiliates&utm_campaign=site_afiliados" },
+    { id: 103, title: "Relógio Inteligente Smartwatch D20", category: "eletronicos", price: "R$ 19,90", oldPrice: "R$ 49,90", discount: "60% OFF", rating: "4,6", reviews: "12k+", savings: "Frete Grátis", image: "assets/images/prod-smartwatch.jpg", affiliateUrl: "https://shopee.com.br/search?keyword=smartwatch&aff_id=1836460594&utm_source=an_1836460594&utm_medium=affiliates&utm_campaign=site_afiliados" },
+    { id: 104, title: "Mini Processador de Alimentos Elétrico USB", category: "casa", price: "R$ 25,00", oldPrice: "R$ 45,00", discount: "44% OFF", rating: "4,9", reviews: "8k+", savings: "Mais Vendido", image: "assets/images/prod-liquidificador.png", affiliateUrl: "https://shopee.com.br/search?keyword=processador&aff_id=1836460594&utm_source=an_1836460594&utm_medium=affiliates&utm_campaign=site_afiliados" },
+    { id: 105, title: "Kit 5 Camisetas Básicas Algodão", category: "moda", price: "R$ 49,90", oldPrice: "R$ 99,00", discount: "50% OFF", rating: "4,8", reviews: "20k+", savings: "Promoção", image: "assets/images/prod-camisetas.jpg", affiliateUrl: "https://shopee.com.br/search?keyword=camiseta&aff_id=1836460594&utm_source=an_1836460594&utm_medium=affiliates&utm_campaign=site_afiliados" }
   ];
 
   const activeStoreData = localStorage.getItem('active_store') === 'shopee' ? SHOPEE_PRODUCTS_DATA : ML_PRODUCTS_DATA;
@@ -47,27 +184,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!container) return;
 
+    const activeStore = localStorage.getItem('active_store') || 'ml';
+    const storeLabel = activeStore === 'shopee' ? 'Shopee' : 'Mercado Livre';
+
     if (products.length === 0) {
-      const activeStore = localStorage.getItem('active_store') || 'ml';
-      const searchUrl = activeStore === 'shopee' 
-        ? `https://shopee.com.br/search?keyword=${encodeURIComponent(document.getElementById('searchInput') ? document.getElementById('searchInput').value : '')}&aff_id=1836460594`
-        : `https://lista.mercadolivre.com.br/${encodeURIComponent(document.getElementById('searchInput') ? document.getElementById('searchInput').value : '')}?campId=91070744`;
-      const btnLabel = activeStore === 'shopee' ? 'Pesquisar diretamente na Shopee' : 'Pesquisar diretamente no Mercado Livre';
+      const currentQuery = document.getElementById('searchInput') ? document.getElementById('searchInput').value.trim() : '';
+      const btnLabel = `Pesquisar "${currentQuery || 'ofertas'}" diretamente no ${storeLabel}`;
 
       container.innerHTML = `
         <div class="empty-products">
-          <p>😕 Nenhuma oferta local encontrada.</p>
-          <button class="btn btn-primary" onclick="window.open('${searchUrl}', '_blank')">${btnLabel}</button>
+          <p>😕 Nenhuma oferta local encontrada para "${currentQuery || 'este termo'}".</p>
+          <button class="btn btn-primary" id="btnEmptySearchRedirect">${btnLabel} →</button>
         </div>
       `;
+
+      const btnEmpty = document.getElementById('btnEmptySearchRedirect');
+      if (btnEmpty) {
+        btnEmpty.addEventListener('click', () => {
+          trackAndOpenAffiliate(currentQuery || 'ofertas', activeStore, `Consulta Externa: "${currentQuery || 'ofertas'}"`, true);
+        });
+      }
       return;
     }
 
     container.innerHTML = products.map((prod, i) => {
       const discountTag = prod.discount || '';
       const isWishlisted = wishlist.has(prod.id);
+      const finalUrl = activeStore === 'shopee' 
+        ? buildShopeeAffiliateUrl(prod.affiliateUrl || prod.title)
+        : buildMlAffiliateUrl(prod.affiliateUrl || prod.title);
+
       return `
-        <div class="product-card" data-id="${prod.id}" data-category="${prod.category}" style="animation-delay:${i * 0.04}s">
+        <div class="product-card" data-id="${prod.id}" data-category="${prod.category}" data-title="${encodeURIComponent(prod.title)}" data-url="${encodeURIComponent(prod.affiliateUrl || '')}" style="animation-delay:${i * 0.04}s">
           ${discountTag ? `<div class="card-discount-badge">${discountTag}</div>` : ''}
           <button class="card-wishlist-btn ${isWishlisted ? 'active' : ''}" data-prod-id="${prod.id}" aria-label="Adicionar aos favoritos" title="Favoritar">
             ${isWishlisted ? '❤️' : '🤍'}
@@ -87,8 +235,8 @@ document.addEventListener('DOMContentLoaded', () => {
               ${prod.oldPrice ? `<span class="price-old">${prod.oldPrice}</span>` : ''}
             </div>
             ${prod.savings ? `<div class="card-savings">${prod.savings}</div>` : ''}
-            <a href="${prod.affiliateUrl || 'https://mercadolivre.com.br'}" target="_blank" rel="noopener noreferrer" class="btn btn-shopee">
-              Ver na ${localStorage.getItem('active_store') === 'shopee' ? 'Shopee' : 'Mercado Livre'} <span class="arrow">→</span>
+            <a href="${finalUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-shopee">
+              Ver no ${storeLabel} <span class="arrow">→</span>
             </a>
           </div>
         </div>
@@ -125,15 +273,26 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function attachProductClickListeners() {
-    const cards = document.querySelectorAll('.product-card');
+    const cards = document.querySelectorAll('.product-card, .bestseller-card, .bs-product-card');
     cards.forEach(card => {
+      if (card.dataset.hasClickListener === 'true') return;
+      card.dataset.hasClickListener = 'true';
+
       card.addEventListener('click', (e) => {
-        if (!e.target.closest('a') && !e.target.closest('.card-wishlist-btn')) {
-          const btnLink = card.querySelector('.btn-shopee');
-          if (btnLink && btnLink.href) {
-            window.open(btnLink.href, '_blank', 'noopener,noreferrer');
-          }
-        }
+        // Não interceptar botão de favoritos
+        if (e.target.closest('.card-wishlist-btn')) return;
+
+        // Se clicou direto no botão .btn-shopee, o evento global no body já cuidará
+        if (e.target.closest('.btn-shopee, .btn-card-action')) return;
+
+        const activeStore = localStorage.getItem('active_store') || 'ml';
+        const titleEl = card.querySelector('.card-title, .bestseller-title');
+        const title = titleEl ? titleEl.textContent.trim() : 'Produto Afiliado';
+        const link = card.querySelector('.btn-shopee, .btn-card-action') || card.querySelector('a');
+        const rawHref = link ? link.getAttribute('href') : '';
+        const targetUrl = (rawHref && rawHref !== '#') ? rawHref : title;
+
+        trackAndOpenAffiliate(targetUrl, activeStore, title, false);
       });
     });
   }
@@ -169,12 +328,17 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Pick top 5 based on sales logic, or just first 5
     const list = ALL_PRODUCTS.slice(0, 5);
-    const salesVolumeMap = { 0: "15k+ vendidos", 1: "10k+ vendidos", 2: "8k+ vendidos", 3: "5k+ vendidos", 4: "3k+ vendidos" };
+    const activeStore = localStorage.getItem('active_store') || 'ml';
+    const storeLabel = activeStore === 'shopee' ? 'Shopee' : 'Mercado Livre';
 
     homeBsGrid.innerHTML = list.map((prod, i) => {
       const rankNum = i + 1;
+      const finalUrl = activeStore === 'shopee' 
+        ? buildShopeeAffiliateUrl(prod.affiliateUrl || prod.title)
+        : buildMlAffiliateUrl(prod.affiliateUrl || prod.title);
+
       return `
-        <div class="bestseller-card">
+        <div class="bestseller-card" data-id="${prod.id}" data-title="${encodeURIComponent(prod.title)}" data-url="${encodeURIComponent(prod.affiliateUrl || '')}">
           <div class="rank-number rank-${rankNum}">${rankNum}</div>
           <div class="bestseller-thumb">
             <img src="${prod.image}" alt="${prod.title}" loading="lazy">
@@ -191,13 +355,15 @@ document.addEventListener('DOMContentLoaded', () => {
               ${prod.oldPrice ? `<span class="old">${prod.oldPrice}</span>` : ''}
               ${prod.discount ? `<span class="disc-tag">${prod.discount}</span>` : ''}
             </div>
-            <a href="${prod.affiliateUrl || '#'}" target="_blank" rel="noopener noreferrer" class="btn btn-shopee btn-card-action">
-              Ver na ${localStorage.getItem('active_store') === 'shopee' ? 'Shopee' : 'Mercado Livre'}
+            <a href="${finalUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-shopee btn-card-action">
+              Ver no ${storeLabel}
             </a>
           </div>
         </div>
       `;
     }).join('');
+
+    attachProductClickListeners();
   }
 
   // =========================================================================
@@ -294,22 +460,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (sortSelect) sortSelect.addEventListener('change', applyFilters);
 
-  // Global Search Integration
-  const ML_AFFILIATE_ID = "91070744";
-  const SHOPEE_AFFILIATE_ID = "1836460594";
-
+  // Global Search Integration & Telemetry
   function performSearch() {
     if (searchInput && searchInput.value.trim().length > 0) {
-      const searchTerm = encodeURIComponent(searchInput.value.trim());
+      const searchTerm = searchInput.value.trim();
       const activeStore = localStorage.getItem('active_store') || 'ml';
-      
-      let searchUrl = '';
-      if (activeStore === 'shopee') {
-        searchUrl = `https://shopee.com.br/search?keyword=${searchTerm}&aff_id=${SHOPEE_AFFILIATE_ID}`;
-      } else {
-        searchUrl = `https://lista.mercadolivre.com.br/${searchTerm}?campId=${ML_AFFILIATE_ID}`;
-      }
-      window.open(searchUrl, '_blank');
+      trackAndOpenAffiliate(searchTerm, activeStore, `Consulta: "${searchTerm}"`, true);
     }
   }
 
@@ -655,10 +811,17 @@ document.addEventListener('DOMContentLoaded', () => {
         filtered = ALL_PRODUCTS.slice(0, 6);
       }
 
+      const activeStore = localStorage.getItem('active_store') || 'ml';
+      const storeLabel = activeStore === 'shopee' ? 'Shopee' : 'Mercado Livre';
+
       categoryGrid.innerHTML = filtered.map((prod, i) => {
         const isWishlisted = wishlist.has(prod.id);
+        const finalUrl = activeStore === 'shopee' 
+          ? buildShopeeAffiliateUrl(prod.affiliateUrl || prod.title)
+          : buildMlAffiliateUrl(prod.affiliateUrl || prod.title);
+
         return `
-          <div class="product-card" data-id="${prod.id}" data-category="${prod.category}" style="animation-delay:${i * 0.05}s">
+          <div class="product-card" data-id="${prod.id}" data-category="${prod.category}" data-title="${encodeURIComponent(prod.title)}" data-url="${encodeURIComponent(prod.affiliateUrl || '')}" style="animation-delay:${i * 0.05}s">
             ${prod.discount ? `<div class="card-discount-badge">${prod.discount}</div>` : ''}
             <button class="card-wishlist-btn ${isWishlisted ? 'active' : ''}" data-prod-id="${prod.id}" aria-label="Adicionar aos favoritos" title="Favoritar">
               ${isWishlisted ? '❤️' : '🤍'}
@@ -678,8 +841,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${prod.oldPrice ? `<span class="price-old">${prod.oldPrice}</span>` : ''}
               </div>
               ${prod.savings ? `<div class="card-savings">${prod.savings}</div>` : ''}
-              <a href="${prod.affiliateUrl || 'https://mercadolivre.com.br'}" target="_blank" rel="noopener noreferrer" class="btn btn-shopee">
-                Ver na ${localStorage.getItem('active_store') === 'shopee' ? 'Shopee' : 'Mercado Livre'} <span class="arrow">→</span>
+              <a href="${finalUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-shopee">
+                Ver no ${storeLabel} <span class="arrow">→</span>
               </a>
             </div>
           </div>
@@ -721,27 +884,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.cat-featured-card').forEach(card => {
       card.addEventListener('click', () => {
         const cat = card.dataset.category;
-        
-        const term = "";
-        const category = card.dataset.category || 'all';
-        const filtered = [];
-        
-        ALL_PRODUCTS.forEach(p => {
-          const matchSearch = p.title.toLowerCase().includes(term);
-          const matchCat = category === 'all' || p.category === category;
-          if (matchSearch && matchCat) filtered.push(p);
-        });
-
-        renderProducts(filtered);
-        
-        // If user typed something and pressed search, redirect to the correct store
-        if (term.length > 0) {
-            const activeStore = localStorage.getItem('active_store') || 'ml';
-            if (activeStore === 'shopee') {
-              window.open(`https://shopee.com.br/search?keyword=${encodeURIComponent(term)}&aff_id=1836460594`, '_blank');
-            } else {
-              window.open(`https://lista.mercadolivre.com.br/${encodeURIComponent(term)}?campId=91070744`, '_blank');
-            }
+        if (cat) {
+          selectCategory(cat, true);
         }
       });
     });
@@ -781,14 +925,20 @@ document.addEventListener('DOMContentLoaded', () => {
         list.sort((a, b) => getPrice(b) - getPrice(a));
       }
 
+      const activeStore = localStorage.getItem('active_store') || 'ml';
+      const storeLabel = activeStore === 'shopee' ? 'Shopee' : 'Mercado Livre';
+
       bsGrid.innerHTML = list.map((prod, i) => {
         const isWishlisted = wishlist.has(prod.id);
         const rankNum = i + 1;
         const isTopRank = rankNum <= 5;
         const salesText = salesVolumeMap[i] || `${Math.max(5, 50 - i * 3)}mil+ vendidos`;
+        const finalUrl = activeStore === 'shopee' 
+          ? buildShopeeAffiliateUrl(prod.affiliateUrl || prod.title)
+          : buildMlAffiliateUrl(prod.affiliateUrl || prod.title);
 
         return `
-          <div class="product-card bs-product-card" data-id="${prod.id}" style="animation-delay:${i * 0.04}s">
+          <div class="product-card bs-product-card" data-id="${prod.id}" data-title="${encodeURIComponent(prod.title)}" data-url="${encodeURIComponent(prod.affiliateUrl || '')}" style="animation-delay:${i * 0.04}s">
             <div class="rank-number-badge ${isTopRank ? 'top-rank' : ''}">${rankNum}</div>
             ${prod.discount ? `<div class="card-discount-badge">${prod.discount}</div>` : ''}
             <button class="card-wishlist-btn ${isWishlisted ? 'active' : ''}" data-prod-id="${prod.id}" aria-label="Adicionar aos favoritos" title="Favoritar">
@@ -809,8 +959,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="price-current">${prod.price}</span>
                 ${prod.oldPrice ? `<span class="price-old">${prod.oldPrice}</span>` : ''}
               </div>
-              <a href="${prod.affiliateUrl || 'https://mercadolivre.com.br'}" target="_blank" rel="noopener noreferrer" class="btn btn-shopee">
-                Ver na ${localStorage.getItem('active_store') === 'shopee' ? 'Shopee' : 'Mercado Livre'} <span class="arrow">→</span>
+              <a href="${finalUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-shopee">
+                Ver no ${storeLabel} <span class="arrow">→</span>
               </a>
             </div>
           </div>
@@ -921,30 +1071,22 @@ document.addEventListener('DOMContentLoaded', () => {
   setStore(savedStore, false);
 
   // =========================================================================
-  // 15. DYNAMIC LINK ROUTING
+  // 15. DYNAMIC LINK ROUTING & AFFILIATE ATTRIBUTION CAPTURE
   // =========================================================================
   document.body.addEventListener('click', (e) => {
     const btn = e.target.closest('.btn-shopee, .btn-card-action');
-    if (btn && btn.tagName === 'A') {
+    if (btn) {
+      e.preventDefault();
       const activeStore = localStorage.getItem('active_store') || 'ml';
-      const currentHref = btn.href || '';
-      
-      let title = '';
       const card = btn.closest('.product-card, .bestseller-card, .bs-product-card');
+      let title = '';
       if (card) {
         const titleEl = card.querySelector('.card-title, .bestseller-title');
         if (titleEl) title = titleEl.textContent.trim();
       }
-      
-      const keyword = title ? encodeURIComponent(title) : '';
-      
-      if (activeStore === 'shopee' && currentHref.includes('mercadolivre.com.br')) {
-         e.preventDefault();
-         window.open(`https://shopee.com.br/search?keyword=${keyword}&aff_id=1836460594`, '_blank');
-      } else if (activeStore === 'ml' && currentHref.includes('shopee.com.br')) {
-         e.preventDefault();
-         window.open(`https://lista.mercadolivre.com.br/${keyword}?campId=91070744`, '_blank');
-      }
+      const rawHref = btn.getAttribute('href') || (card && card.dataset.url ? decodeURIComponent(card.dataset.url) : '');
+      const targetUrl = (rawHref && rawHref !== '#') ? rawHref : title;
+      trackAndOpenAffiliate(targetUrl, activeStore, title || 'Produto Afiliado', false);
     }
   });
 

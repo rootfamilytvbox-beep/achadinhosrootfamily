@@ -224,9 +224,12 @@ def extrair_dados_shopee(url):
             imagem_url = cat_map.get(categoria, "assets/images/prod-fone.jpg")
 
     affiliate_url = final_url
-    if AFFILIATE_ID and f"aff_id={AFFILIATE_ID}" not in affiliate_url:
-        sep = "&" if "?" in affiliate_url else "?"
-        affiliate_url = f"{affiliate_url}{sep}aff_id={AFFILIATE_ID}"
+    if any(short in (affiliate_url or "") for short in ["s.shopee.com.br", "shope.ee"]):
+        pass
+    elif AFFILIATE_ID:
+        url_limpa = re.sub(r'[?&](aff_id|utm_source|utm_medium|utm_campaign|af_siteid)=[^&]*', '', affiliate_url).rstrip('&').rstrip('?')
+        sep = "&" if "?" in url_limpa else "?"
+        affiliate_url = f"{url_limpa}{sep}aff_id={AFFILIATE_ID}&utm_source=an_{AFFILIATE_ID}&utm_medium=affiliates&utm_campaign=site_afiliados&af_siteid=an_{AFFILIATE_ID}"
 
     return {
         "title": titulo,
