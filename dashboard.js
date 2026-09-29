@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const ML_AFFILIATE_ID = '91070744';
-  const SHOPEE_AFFILIATE_ID = '1836460594';
+  const SHOPEE_AFFILIATE_ID = '18364260594';
 
   function getLast7Days() {
     const labels = [];
