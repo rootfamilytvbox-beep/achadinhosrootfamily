@@ -352,7 +352,7 @@ def publicar_no_site(ofertas):
     produtos_existentes = []
 
     config = carregar_config()
-    aff_id = config.get("affiliate_id", "1836460594")
+    aff_id = config.get("affiliate_id", "18364260594")
 
     if os.path.exists(DATA_FILE):
         try:

@@ -43,7 +43,7 @@ DATA_FILE = os.path.join(BASE_DIR, "data", "products.json")
 IMAGES_DIR = os.path.join(BASE_DIR, "assets", "images")
 
 # Configuração do seu link de afiliado Shopee
-AFFILIATE_ID = "1836460594"
+AFFILIATE_ID = "18364260594"
 DEFAULT_AFFILIATE_BASE = f"https://shopee.com.br?aff_id={AFFILIATE_ID}"
 
 HEADERS = {
