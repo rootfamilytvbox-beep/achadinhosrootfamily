@@ -3005,6 +3005,33 @@ h1, h2, h3, h4, .brand-name, .btn, .nav-link {
   }
 }
 
+/* Tutorial Modal Styles */
+.tutorial-card {
+  max-width: 450px;
+  text-align: center;
+}
 
+.tutorial-body {
+  padding: 20px;
+}
 
+.tutorial-image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  background: var(--bg-card);
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
 
+.tutorial-image-container img {
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.tutorial-image-container img:hover {
+  transform: scale(1.1);
+}

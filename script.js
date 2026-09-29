@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. DATA & AFFILIATE CANONICAL ENGINE
   // =========================================================================
   const ML_AFFILIATE_ID = "91070744";
-  const SHOPEE_AFFILIATE_ID = "1836460594";
+  const SHOPEE_AFFILIATE_ID = "18364260594";
 
   /**
    * Gera a URL canônica de afiliado da Shopee garantindo o identificador e tags UTM oficiais.
@@ -154,11 +154,11 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   const SHOPEE_PRODUCTS_DATA = [
-    { id: 101, title: "Fone de Ouvido Bluetooth TWS Pro 5", category: "eletronicos", price: "R$ 29,90", oldPrice: "R$ 59,90", discount: "50% OFF", rating: "4,7", reviews: "10k+", savings: "Frete Grátis", image: "assets/images/prod-fone-tws.png", affiliateUrl: "https://shopee.com.br/search?keyword=fone+bluetooth&aff_id=1836460594&utm_source=an_1836460594&utm_medium=affiliates&utm_campaign=site_afiliados" },
-    { id: 102, title: "Fita Led RGB 5 Metros com Controle", category: "casa", price: "R$ 15,90", oldPrice: "R$ 35,00", discount: "54% OFF", rating: "4,8", reviews: "5k+", savings: "Oferta Relâmpago", image: "assets/images/prod-fita-led.jpg", affiliateUrl: "https://shopee.com.br/search?keyword=fita+led&aff_id=1836460594&utm_source=an_1836460594&utm_medium=affiliates&utm_campaign=site_afiliados" },
-    { id: 103, title: "Relógio Inteligente Smartwatch D20", category: "eletronicos", price: "R$ 19,90", oldPrice: "R$ 49,90", discount: "60% OFF", rating: "4,6", reviews: "12k+", savings: "Frete Grátis", image: "assets/images/prod-smartwatch.jpg", affiliateUrl: "https://shopee.com.br/search?keyword=smartwatch&aff_id=1836460594&utm_source=an_1836460594&utm_medium=affiliates&utm_campaign=site_afiliados" },
-    { id: 104, title: "Mini Processador de Alimentos Elétrico USB", category: "casa", price: "R$ 25,00", oldPrice: "R$ 45,00", discount: "44% OFF", rating: "4,9", reviews: "8k+", savings: "Mais Vendido", image: "assets/images/prod-liquidificador.png", affiliateUrl: "https://shopee.com.br/search?keyword=processador&aff_id=1836460594&utm_source=an_1836460594&utm_medium=affiliates&utm_campaign=site_afiliados" },
-    { id: 105, title: "Kit 5 Camisetas Básicas Algodão", category: "moda", price: "R$ 49,90", oldPrice: "R$ 99,00", discount: "50% OFF", rating: "4,8", reviews: "20k+", savings: "Promoção", image: "assets/images/prod-camisetas.jpg", affiliateUrl: "https://shopee.com.br/search?keyword=camiseta&aff_id=1836460594&utm_source=an_1836460594&utm_medium=affiliates&utm_campaign=site_afiliados" }
+    { id: 101, title: "Fone de Ouvido Bluetooth TWS Pro 5", category: "eletronicos", price: "R$ 29,90", oldPrice: "R$ 59,90", discount: "50% OFF", rating: "4,7", reviews: "10k+", savings: "Frete Grátis", image: "assets/images/prod-fone-tws.png", affiliateUrl: "https://shopee.com.br/search?keyword=fone+bluetooth&aff_id=18364260594&utm_source=an_18364260594&utm_medium=affiliates&utm_campaign=site_afiliados" },
+    { id: 102, title: "Fita Led RGB 5 Metros com Controle", category: "casa", price: "R$ 15,90", oldPrice: "R$ 35,00", discount: "54% OFF", rating: "4,8", reviews: "5k+", savings: "Oferta Relâmpago", image: "assets/images/prod-fita-led.jpg", affiliateUrl: "https://shopee.com.br/search?keyword=fita+led&aff_id=18364260594&utm_source=an_18364260594&utm_medium=affiliates&utm_campaign=site_afiliados" },
+    { id: 103, title: "Relógio Inteligente Smartwatch D20", category: "eletronicos", price: "R$ 19,90", oldPrice: "R$ 49,90", discount: "60% OFF", rating: "4,6", reviews: "12k+", savings: "Frete Grátis", image: "assets/images/prod-smartwatch.jpg", affiliateUrl: "https://shopee.com.br/search?keyword=smartwatch&aff_id=18364260594&utm_source=an_18364260594&utm_medium=affiliates&utm_campaign=site_afiliados" },
+    { id: 104, title: "Mini Processador de Alimentos Elétrico USB", category: "casa", price: "R$ 25,00", oldPrice: "R$ 45,00", discount: "44% OFF", rating: "4,9", reviews: "8k+", savings: "Mais Vendido", image: "assets/images/prod-liquidificador.png", affiliateUrl: "https://shopee.com.br/search?keyword=processador&aff_id=18364260594&utm_source=an_18364260594&utm_medium=affiliates&utm_campaign=site_afiliados" },
+    { id: 105, title: "Kit 5 Camisetas Básicas Algodão", category: "moda", price: "R$ 49,90", oldPrice: "R$ 99,00", discount: "50% OFF", rating: "4,8", reviews: "20k+", savings: "Promoção", image: "assets/images/prod-camisetas.jpg", affiliateUrl: "https://shopee.com.br/search?keyword=camiseta&aff_id=18364260594&utm_source=an_18364260594&utm_medium=affiliates&utm_campaign=site_afiliados" }
   ];
 
   const activeStoreData = localStorage.getItem('active_store') === 'shopee' ? SHOPEE_PRODUCTS_DATA : ML_PRODUCTS_DATA;
@@ -1069,6 +1069,32 @@ document.addEventListener('DOMContentLoaded', () => {
   // Always initialize based on saved preference
   const savedStore = localStorage.getItem('active_store') || 'ml';
   setStore(savedStore, false);
+
+  // =========================================================================
+  // 14.5. TUTORIAL MODAL
+  // =========================================================================
+  const tutorialModal = document.getElementById('tutorialModal');
+  const closeTutorialModal = document.getElementById('closeTutorialModal');
+  const btnEntendiTutorial = document.getElementById('btnEntendiTutorial');
+
+  if (tutorialModal && !localStorage.getItem('tutorial_seen')) {
+    setTimeout(() => {
+      if (typeof openModal === 'function') openModal(tutorialModal);
+    }, 1500);
+  }
+
+  function closeTutorial() {
+    if (typeof closeModal === 'function') closeModal(tutorialModal);
+    localStorage.setItem('tutorial_seen', 'true');
+  }
+
+  if (closeTutorialModal) closeTutorialModal.addEventListener('click', closeTutorial);
+  if (btnEntendiTutorial) btnEntendiTutorial.addEventListener('click', closeTutorial);
+  if (tutorialModal) {
+    tutorialModal.addEventListener('click', (e) => {
+      if (e.target === tutorialModal) closeTutorial();
+    });
+  }
 
   // =========================================================================
   // 15. DYNAMIC LINK ROUTING & AFFILIATE ATTRIBUTION CAPTURE
